@@ -7,16 +7,36 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.4.2",
     "firebase": "^5.0.3",
+    "moment": "^2.24.0",
+    "nodemailer-react": "^0.1.0",
     "react": "16.8.3",
-    "react-native": "0.59.4"
+    "react-moment": "^0.9.2",
+    "react-native": "0.59.4",
+    "react-native-camera": "^2.11.0",
+    "react-native-datepicker": "^1.7.2",
+    "react-native-gesture-handler": "^1.2.1",
+    "react-native-google-maps-directions": "^2.1.0",
+    "react-native-mail": "^4.0.0",
+    "react-native-maps": "^0.24.2",
+    "react-native-maps-directions": "^1.7.0",
+    "react-native-qrcode": "^0.2.7",
+    "react-native-qrcode-scanner": "^1.2.1",
+    "react-native-slider": "^0.11.0",
+    "react-native-storage": "^1.0.1",
+    "react-native-text-input-mask": "^1.0.1",
+    "react-native-vector-icons": "^6.5.0",
+    "react-navigation": "^3.7.1",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/runtime": "^7.5.5",
-    "babel-jest": "^24.8.0",
-    "jest": "^24.8.0",
-    "metro-react-native-babel-preset": "^0.55.0",
+    "@babel/core": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1",
+    "metro-react-native-babel-preset": "^0.53.1",
     "react-test-renderer": "16.8.3"
   },
   "jest": {
