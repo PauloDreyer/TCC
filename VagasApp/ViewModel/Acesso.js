@@ -1,5 +1,6 @@
 import { signIn, signOut } from '../Model/FirebaseAuth';
 import { insereUsuario, atualizarDados } from '../Model/Usuario';
+import { enviarEmailRedefinicaoSenha } from '../Model/FirebaseAuth';
 import {ToastAndroid} from 'react-native';
 
 // Login
@@ -108,4 +109,25 @@ export const alterarCadastroMotorista = (dados)=>{
 export const alterarCadastroEstacionamento = (dados)=>{
     let retorno = alterarUsuario(dados.key, dados.nome, '', dados.cnpj, dados.email, dados.foneComercial, dados.fone, '', dados.cep, dados.endereco, dados.numero, dados.cidade, dados.estado, dados.senha, dados.contraSenha, dados.tipoUsuario, dados.latitude, dados.longitude, dados.senhaAtual);
     return retorno;
+}
+
+export const alterarSenha = async(email, senha, contraSenha)=>{
+    let valido = 'true';
+    if(senha != contraSenha){
+        valido = false;
+        ToastAndroid.showWithGravity('Ops! As senhas com conferem!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+    } 
+    
+    if(valido == 'true'){
+        return new Promise((resolve, reject) => {
+            let retorno = enviarEmailRedefinicaoSenha(email).then(function() {
+                console.log('true');
+                resolve('true')
+            }).catch(function(error) {
+                reject('false');
+            });    
+        });
+
+    }
+    return valido;
 }

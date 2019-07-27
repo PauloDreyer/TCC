@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {View, Text} from 'react-native';
 import QRCode from 'react-native-qrcode';
 import styles from '../../Componente/Style';
+import { NavigationEvents } from 'react-navigation';
  
 export default class ValidarEntrada extends Component {
  
@@ -14,10 +15,14 @@ export default class ValidarEntrada extends Component {
   }
 
   componentDidMount=()=>{
-      let key = this.props.navigation.getParam('keyReserva');
-      this.setState({keyReserva: key,
-                    titulo: 'Código de Entrada'
-                   });
+    this.carregar();
+  }
+
+  carregar=()=>{
+    let key = this.props.navigation.getParam('keyReserva');
+    this.setState({keyReserva: key,
+                  titulo: 'Código de Entrada'
+                 });
   }
   
   render() {
@@ -32,6 +37,9 @@ export default class ValidarEntrada extends Component {
                         fgColor='#F1F2F3'/>
                 </View>
             </View>
+            <NavigationEvents
+              onDidFocus={payload => this.carregar()}
+            />
         </View>
     );
   }

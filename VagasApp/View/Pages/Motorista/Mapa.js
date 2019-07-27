@@ -47,10 +47,7 @@ export default class Mapa extends Component{
           global.longitude = Number(position.coords.longitude);
           global.filtrar = true;
 
-          let retorno = new Promise((resolve, reject) => {
-                              component.consultar(); 
-                              resolve();
-                              });
+          component.processa();
           
         }/*,
         error => alert(error), 
@@ -61,6 +58,14 @@ export default class Mapa extends Component{
   reservar=()=>{
     global.origem = {latitude: global.latitude, longitude: global.longitude};
     this.props.navigation.navigate('CadastroReservaVagas')
+  }
+
+  processa = async()=>{
+    return new Promise((resolve, reject) => {
+      component.consultar().then(function(){
+        resolve();
+      })    
+    });
   }
 
   consultar=()=>{
@@ -148,7 +153,7 @@ export default class Mapa extends Component{
             .done();
         }
       })
-      }, 500);
+      }, 1000);
     }
   }
 
@@ -180,7 +185,7 @@ export default class Mapa extends Component{
           ))}
         </MapView>
         <NavigationEvents
-          onDidFocus={payload => component.consultar()}
+          onDidFocus={payload => component.processa()}
         />
       </View>
     );

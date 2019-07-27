@@ -4,6 +4,7 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from '../Componente/Style';
 import {insereCodigoVerificacao} from '../../ViewModel/GerenciaVerificacao';
+import { alterarSenha } from '../../ViewModel/Acesso';
 
 export default class EsqueciMinhaSenha extends Component {
 
@@ -58,7 +59,7 @@ export default class EsqueciMinhaSenha extends Component {
                                 onChangeText={(contraSenha) => {forgot.setState({contraSenha})}}/>
                     
                     <TouchableOpacity style={styles.buttonBoxConfirmar}
-                                onPress={() =>{forgot.handleEmail()}}>
+                                onPress={() =>{forgot.redefinirSenha()}}>
                         <Text style={styles.buttonTextLogar}>Alterar</Text>
                     </TouchableOpacity>             
                 </View> 
@@ -72,7 +73,12 @@ export default class EsqueciMinhaSenha extends Component {
         if(codigoVerificacao != ''){
             forgot.setState({codigoVerificacao: codigoVerificacao, heightBotton: 0, opacityBotton: 0, paddingVertical: 0});
         }
-      }
+    }
+
+    redefinirSenha = async() =>{
+        await alterarSenha(forgot.state.email, forgot.state.senha, forgot.state.contraSenha);
+        console.log('Foi');
+    }
 
     render() {
         return (

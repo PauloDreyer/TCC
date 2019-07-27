@@ -65,19 +65,36 @@ export const createUser =async(nome, cpf, cnpj, email, foneComercial, fone, plac
 }
 
 const alteraSenha =(senha)=>{
-    var user = firebase.auth().currentUser;
-    user.updatePassword(senha).then(function() {
-        return true;
 
-    }).catch(function(error) {
-        if(error.code == 'auth/weak-password'){
-            ToastAndroid.showWithGravity('Senha Fraca! Informe Números e Caracteres!', ToastAndroid.SHORT, ToastAndroid.CENTER);
-        }  
-        return false;
-    });
+    return new Promise((resolve, reject) => {
+        var user = firebase.auth().currentUser;
+        user.updatePassword(senha).then(function() {
+            resolve(true); 
+    
+        }).catch(function(error) {
+            if(error.code == 'auth/weak-password'){
+                ToastAndroid.showWithGravity('Senha Fraca! Informe Números e Caracteres!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+            }  
+            reject(false);
+        });	
+	}); 
+
 }
 
 export const redefinirSenha=async(senha)=>{
 
     return await alteraSenha(senha);
+}
+
+export const enviarEmailRedefinicaoSenha = async(email)=>{
+    
+    return new Promise((resolve, reject) => {
+        firebase.auth().sendPasswordResetEmail(email).then(function() {
+            ToastAndroid.showWithGravity('Email Enviado!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+            resolve();
+          }).catch(function(error) {
+            console.log(error);
+            reject();
+          });    
+    });    
 }

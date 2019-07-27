@@ -168,6 +168,7 @@ export default class Filtro extends Component {
               </Picker>
             </View>  
 
+
             <View style={styles.filtroCidade}>      
               <Text style={styles.labelCentralizadoClaro}>Cidade</Text>
               <TextInput placeholder="Pesquisar..." placeholderTextColor="#F1F2F3" underlineColorAndroid="#26A557" onChangeText={(text) => {this.searchFilterFunction(text)}} />
@@ -178,14 +179,12 @@ export default class Filtro extends Component {
                   })}
               </Picker>
             </View>   
-
-
-            <View style={styles.infoContainer}>
-              <TouchableOpacity style={styles.buttonBoxConfirmar} 
+            
+            <TouchableOpacity style={{...styles.buttonBoxConfirmar, marginTop: 15, marginBottom: 100}} 
                                 onPress={() =>{this.setFiltro()}}>
                 <Text style={styles.buttonTextLogar}>Aplicar</Text>
-              </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
+
           </ScrollView>
         </View>
       </View>
