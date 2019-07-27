@@ -61,11 +61,7 @@ export default class Mapa extends Component{
   }
 
   processa = async()=>{
-    return new Promise((resolve, reject) => {
-      component.consultar().then(function(){
-        resolve();
-      })    
-    });
+    await component.consultar();  
   }
 
   consultar=()=>{
@@ -91,30 +87,27 @@ export default class Mapa extends Component{
 
       component.listaEstacionamentos = [];
       origin = Url.origin + lat + ',' + lng;
-
-      let retorno = new Promise((resolve, reject) => {
-        if(global.cidade != '' && global.estado != ''){
-          ref.orderByChild("cidade").equalTo(global.cidade)&&ref.orderByChild("estado").equalTo(global.estado).on("child_added", function(snapshot) {
-            component.listaEstacionamentos.push(snapshot.toJSON());
-          })
-        }
-        else if(global.cidade != ''){
-          ref.orderByChild("cidade").equalTo(global.cidade).on("child_added", function(snapshot) {
-            component.listaEstacionamentos.push(snapshot.toJSON());
-          })
-        }
-        else if(global.estado != ''){
-          ref.orderByChild("estado").equalTo(global.estado).on("child_added", function(snapshot) {
-            component.listaEstacionamentos.push(snapshot.toJSON());
-          })
-        }
-        else{
-          ref.on("child_added", function(snapshot) {
-            component.listaEstacionamentos.push(snapshot.toJSON());
-          })
-        }
-        resolve();
-      });
+      if(global.cidade != '' && global.estado != ''){
+        ref.orderByChild("cidade").equalTo(global.cidade)&&ref.orderByChild("estado").equalTo(global.estado).on("child_added", function(snapshot) {
+          component.listaEstacionamentos.push(snapshot.toJSON());
+        })
+      }
+      else if(global.cidade != ''){
+        ref.orderByChild("cidade").equalTo(global.cidade).on("child_added", function(snapshot) {
+          component.listaEstacionamentos.push(snapshot.toJSON());
+        })
+      }
+      else if(global.estado != ''){
+        ref.orderByChild("estado").equalTo(global.estado).on("child_added", function(snapshot) {
+          component.listaEstacionamentos.push(snapshot.toJSON());
+        })
+      }
+      else{
+        ref.on("child_added", function(snapshot) {
+          component.listaEstacionamentos.push(snapshot.toJSON());
+        })
+        
+      }
 
       setTimeout(function(){
         component.setState({
@@ -122,7 +115,6 @@ export default class Mapa extends Component{
       });
 
       component.listaEstacionamentos.map(item =>{
-
         if((item.cidade == global.cidade || global.cidade =='') && 
           (item.preco <= global.preco || global.preco == 0) &&
           (item.avaliacao >= global.avaliacao || global.avaliacao == 0) &&
@@ -155,6 +147,7 @@ export default class Mapa extends Component{
       })
       }, 1000);
     }
+    return 'ok';
   }
 
   render() {
@@ -181,6 +174,7 @@ export default class Mapa extends Component{
               onPress={()=>{global.keyEstacionamento= marker.key, global.destino = marker.coordinate}}
               description={marker.description}
               onCalloutPress={component.reservar}
+              pinColor={'#26A557'}
             />
           ))}
         </MapView>
