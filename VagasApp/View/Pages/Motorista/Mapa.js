@@ -3,8 +3,8 @@ import {View} from 'react-native';
 import styles from '../../Componente/Style';
 import MapView from 'react-native-maps';
 import Url from '../../../Model/url';
-import firebase from '../../../Model/Firebase';
 import { NavigationEvents } from 'react-navigation';
+import { listaEstacionamentos } from '../../../ViewModel/GerenciaMapa';
 export default class Mapa extends Component{
   constructor(props) {
     super(props);
@@ -32,8 +32,17 @@ export default class Mapa extends Component{
 
 } 
 
-   componentDidMount = async() =>{
-      await navigator.geolocation.getCurrentPosition(
+  componentDidMount = async() =>{
+    let retorno = await component.getLocalizacao();
+
+    if(retorno){
+      component.processa(); 
+    }      
+  }
+
+  getLocalizacao =()=>{
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
         (position) => {
           this.setState({
           locationCoordinates:{
@@ -46,13 +55,10 @@ export default class Mapa extends Component{
           global.latitude = Number(position.coords.latitude);
           global.longitude = Number(position.coords.longitude);
           global.filtrar = true;
-
-          component.processa();
+          resolve(true);
           
-        }/*,
-        error => alert(error), 
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }*/);
-
+        });   
+    }); 
   }
 
   reservar=()=>{
@@ -64,16 +70,16 @@ export default class Mapa extends Component{
     await component.consultar();  
   }
 
-  consultar=()=>{
+  consultar=async (e)=>{
     if(global.filtrar){
       
       global.filtrar = false;
-      var ref = firebase.database().ref("estacionamento");
       let origin;
       let destination;
       let distancia = 0;
       lat = global.latitude;
       lng = global.longitude;
+      origin = Url.origin + lat + ',' + lng;
 
       component.setState({
         markers: [],
@@ -84,33 +90,9 @@ export default class Mapa extends Component{
           longitudeDelta: Number(0.0221)
         }
       });
+      await listaEstacionamentos(component);
 
-      component.listaEstacionamentos = [];
-      origin = Url.origin + lat + ',' + lng;
-      if(global.cidade != '' && global.estado != ''){
-        ref.orderByChild("cidade").equalTo(global.cidade)&&ref.orderByChild("estado").equalTo(global.estado).on("child_added", function(snapshot) {
-          component.listaEstacionamentos.push(snapshot.toJSON());
-        })
-      }
-      else if(global.cidade != ''){
-        ref.orderByChild("cidade").equalTo(global.cidade).on("child_added", function(snapshot) {
-          component.listaEstacionamentos.push(snapshot.toJSON());
-        })
-      }
-      else if(global.estado != ''){
-        ref.orderByChild("estado").equalTo(global.estado).on("child_added", function(snapshot) {
-          component.listaEstacionamentos.push(snapshot.toJSON());
-        })
-      }
-      else{
-        ref.on("child_added", function(snapshot) {
-          component.listaEstacionamentos.push(snapshot.toJSON());
-        })
-        
-      }
-
-      setTimeout(function(){
-        component.setState({
+      component.setState({
           markers: []
       });
 
@@ -145,7 +127,6 @@ export default class Mapa extends Component{
             .done();
         }
       })
-      }, 1000);
     }
     return 'ok';
   }
