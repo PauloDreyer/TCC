@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { View, Text } from 'react-native';
+import { View, Text, StatusBar } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from '../Componente/Style';
@@ -83,6 +83,9 @@ export default class EsqueciMinhaSenha extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar  animated
+                            barStyle='light-content'
+                            translucent />
                 <View style={styles.infoContainer}>
                     <Text style={styles.labelNormal}>Será enviado para o seu email um código de verificação, para redefinir a senha.</Text>
                     

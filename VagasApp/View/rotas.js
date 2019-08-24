@@ -239,7 +239,7 @@ const AppNavigator = createStackNavigator({
     }, 
     {
       tabBarOptions: {
-        activeTintColor:'#F1F2F3',
+        activeTintColor:'#37EF7D',
         inactiveTintColor: '#CCCCCC',
         showIcon: true,
         showLabel: true,
@@ -314,7 +314,7 @@ const AppNavigator = createStackNavigator({
     },
     {
         tabBarOptions: {
-          activeTintColor:'#F1F2F3',
+          activeTintColor:'#37EF7D',
           inactiveTintColor: '#CCCCCC',
           showIcon: true,
           showLabel: true,

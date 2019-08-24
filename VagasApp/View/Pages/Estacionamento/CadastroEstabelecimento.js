@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { View, KeyboardAvoidingView, Text, ToastAndroid } from 'react-native';
+import { View, KeyboardAvoidingView, Text, StatusBar } from 'react-native';
 import styles from '../../Componente/Style';
 import { TextInput, TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import TextInputMask from 'react-native-text-input-mask';
@@ -75,6 +75,9 @@ export class Estabelecimento extends Component {
    render() {
       return (
         <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
+            <StatusBar  animated
+                        barStyle='light-content'
+                        translucent />
             <View style={styles.infoContainer}>
                 <ScrollView>
                     <Text style={styles.label}>Razão Social</Text>

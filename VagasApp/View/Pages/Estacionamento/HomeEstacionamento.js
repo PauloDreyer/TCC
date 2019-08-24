@@ -92,9 +92,9 @@ exibirListagem=(item)=>{
 
 render() {
     return (
-        <View style={styles.Container}>    
+        <View style={{...styles.Container, backgroundColor: '#F1F2F3'}}>    
         
-            <View style={styles.infoContainer2}>
+            <View style={{...styles.infoContainer2, backgroundColor: '#F1F2F3'}}>
                 <Text style={styles.tituloPagina}>Resersas Programadas</Text>      
                 <Text style={styles.labelCentralizado}>Dia</Text>
                 <View style={styles.dataPickerContainerConsulta}>
@@ -134,7 +134,7 @@ render() {
                     />
                 </ScrollView>
             </View>  
-            <View style={styles.footerContainer}>
+            <View style={{...styles.footerContainer, backgroundColor: '#F1F2F3'}}>
                 <TouchableOpacity style={styles.buttonBoxValidar}
                                 onPress={() =>{comp.props.navigation.navigate('RegistrarEntrada')}}>
                     <Text style={styles.labelCentralizadoClaro}>Registrar Entrada </Text>

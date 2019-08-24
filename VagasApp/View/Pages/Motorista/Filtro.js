@@ -4,7 +4,7 @@ import {
   Text,
   Image,
   Picker,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import Slider from 'react-native-slider';
 import { TextInput, ScrollView, Switch } from 'react-native-gesture-handler';
@@ -108,8 +108,9 @@ export default class Filtro extends Component {
     }
 
     return (
-      <View style={styles.Container}>
-        <View style={styles.infoContainer}>
+      <View style={{...styles.Container, backgroundColor: '#F1F2F3'}}>
+
+        <View style={{...styles.infoContainer} }>
           <Text style={styles.tituloPagina}>Filtro</Text> 
           <ScrollView>
             <View style={styles.filtro}>
