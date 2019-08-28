@@ -65,10 +65,10 @@ export default class MinhasReservas extends Component {
             </View> 
         );
     }
-
+    
     render() {
         return (
-            <View style={styles.Container}>    
+            <View style={styles.container}>    
                 <View style={styles.infoContainer}>
                     <Text style={styles.tituloPagina}>Minhas Reservas</Text>   
                     <ScrollView>

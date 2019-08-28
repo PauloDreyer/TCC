@@ -103,9 +103,9 @@ exibirListagem=(item)=>{
 
     render() {
         return (
-            <View style={styles.Container}>    
+            <View style={styles.container}>    
             
-                <View style={{...styles.infoContainer2, height: '96%'}}>
+                <View style={styles.infoContainer2}>
                     <Text style={styles.tituloPagina}>Histórico</Text> 
                     <Text style={styles.labelCentralizado}>Dia</Text>
                     <View style={styles.dataPickerContainerConsulta}>

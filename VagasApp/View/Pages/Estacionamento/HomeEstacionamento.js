@@ -92,9 +92,9 @@ exibirListagem=(item)=>{
 
 render() {
     return (
-        <View style={{...styles.Container, backgroundColor: '#F1F2F3'}}>    
+        <View style={{...styles.container}}>    
         
-            <View style={{...styles.infoContainer2, backgroundColor: '#F1F2F3'}}>
+            <View style={{...styles.infoContainer2}}>
                 <Text style={styles.tituloPagina}>Resersas Programadas</Text>      
                 <Text style={styles.labelCentralizado}>Dia</Text>
                 <View style={styles.dataPickerContainerConsulta}>

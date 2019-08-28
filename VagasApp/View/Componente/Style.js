@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
         bottom: 0,
         width: '100%',
         marginTop: 20,
-        paddingHorizontal: 0
+        paddingHorizontal: 0,
+        backgroundColor: '#F1F2F3'
     },
 
     infoContainer2: {
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
         height: '91%',
         marginTop: 20,
         paddingHorizontal: 0,
+        backgroundColor: '#F1F2F3'
     },
     
     cameraContainer: {

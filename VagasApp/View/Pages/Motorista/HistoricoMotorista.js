@@ -108,8 +108,8 @@ export default class HistoricoMotorista extends Component {
 
     render() {
         return (
-            <View style={styles.Container}>    
-                <View style={{...styles.infoContainer2, height: '96%'}}>
+            <View style={styles.container}>    
+                <View style={{...styles.infoContainer2, height: '96.2%'}}>
                     <Text style={styles.tituloPagina}>Histórico</Text> 
                     <Text style={styles.labelCentralizado}>Dia</Text>
                     <View style={styles.dataPickerContainerConsulta}>

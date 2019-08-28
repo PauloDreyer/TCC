@@ -108,9 +108,9 @@ export default class Filtro extends Component {
     }
 
     return (
-      <View style={{...styles.Container, backgroundColor: '#F1F2F3'}}>
+      <View style={styles.container}>
 
-        <View style={{...styles.infoContainer} }>
+        <View style={styles.infoContainer}>
           <Text style={styles.tituloPagina}>Filtro</Text> 
           <ScrollView>
             <View style={styles.filtro}>
