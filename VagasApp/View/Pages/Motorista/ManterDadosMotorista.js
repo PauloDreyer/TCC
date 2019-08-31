@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { View, KeyboardAvoidingView, Text } from 'react-native';
 import styles from '../../Componente/Style';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { TextInput, TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import TextInputMask from 'react-native-text-input-mask';
 import {alterarCadastroMotorista} from '../../../ViewModel/Acesso';
 
@@ -47,6 +47,7 @@ export default class MeusDadosMotorista extends Component {
         <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
             <View style={styles.infoContainer}>
                 <Text style={styles.tituloPagina}>Meus Dados</Text>  
+                <ScrollView>
                 <Text style={styles.label}>Nome</Text>
                 <TextInput  style={styles.inputBox}
                             placeholderTextColor="#1E273D"
@@ -121,12 +122,12 @@ export default class MeusDadosMotorista extends Component {
                             ref={(Input)=>this.contraSenhaInput = Input}
                             onChangeText={(contraSenha) => {this.setState({contraSenha})}}/>
 
-                <View style={styles.infoContainer}>
                     <TouchableOpacity style={styles.buttonBoxConfirmar}
                                         onPress={this.alterarDados}>
                         <Text style={styles.buttonTextLogar}>Alterar</Text>
                     </TouchableOpacity>
-                </View>    
+               
+                </ScrollView>   
             </View>              
         </KeyboardAvoidingView>
         );

@@ -181,7 +181,7 @@ export default class Filtro extends Component {
               </Picker>
             </View>   
             
-            <TouchableOpacity style={{...styles.buttonBoxConfirmar, marginTop: 15, marginBottom: 100}} 
+            <TouchableOpacity style={{...styles.buttonBoxConfirmar, marginTop: 15, marginBottom: 50}} 
                                 onPress={() =>{this.setFiltro()}}>
                 <Text style={styles.buttonTextLogar}>Aplicar</Text>
             </TouchableOpacity>

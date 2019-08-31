@@ -193,12 +193,10 @@ export default class CadastroVagas extends Component {
                                         onChangeText={(preco) => {component.setState({preco: preco})}}
                                         mask={"[00].[00]"}/> 
 
-                        <View style={styles.infoContainer}>
-                            <TouchableOpacity style={styles.buttonBoxConfirmar}
-                                            onPress={this.atualizarDados}>
-                                <Text style={styles.buttonTextLogar}>Salvar</Text>
-                            </TouchableOpacity>
-                        </View>  
+                        <TouchableOpacity style={styles.buttonBoxConfirmar}
+                                        onPress={this.atualizarDados}>
+                            <Text style={styles.buttonTextLogar}>Salvar</Text>
+                        </TouchableOpacity> 
 
                     </ScrollView> 
                     <NavigationEvents onDidFocus={payload => component.componentDidMount()}/>                              

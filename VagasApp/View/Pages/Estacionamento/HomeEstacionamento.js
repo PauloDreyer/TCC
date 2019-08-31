@@ -92,9 +92,8 @@ exibirListagem=(item)=>{
 
 render() {
     return (
-        <View style={{...styles.container}}>    
-        
-            <View style={{...styles.infoContainer2}}>
+        <View style={styles.container}>    
+            <View style={styles.infoContainer2}>
                 <Text style={styles.tituloPagina}>Resersas Programadas</Text>      
                 <Text style={styles.labelCentralizado}>Dia</Text>
                 <View style={styles.dataPickerContainerConsulta}>
@@ -133,15 +132,17 @@ render() {
                         renderItem={({item}) => comp.exibirListagem(item)}
                     />
                 </ScrollView>
+                
             </View>  
-            <View style={{...styles.footerContainer, backgroundColor: '#F1F2F3'}}>
+        
+            <View style={styles.footerContainer}>
                 <TouchableOpacity style={styles.buttonBoxValidar}
                                 onPress={() =>{comp.props.navigation.navigate('RegistrarEntrada')}}>
                     <Text style={styles.labelCentralizadoClaro}>Registrar Entrada </Text>
                 </TouchableOpacity>
             </View> 
-        
             <NavigationEvents onDidFocus={payload => {comp.setState({reservas: []}), comp.atualizar()}}/>   
+
         </View>    
     );
 }

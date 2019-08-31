@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         position:'relative',
         bottom: 0,
         width: '100%',
-        height: '91%',
+        height: '85%',
         marginTop: 20,
         paddingHorizontal: 0,
         backgroundColor: '#F1F2F3'
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     footerContainer:{
         flex: 2,
         width: '100%', 
-        height: 60, 
+        height: '15%', 
         marginTop: 0,
         position: 'relative',
         backgroundColor: '#F1F2F3'

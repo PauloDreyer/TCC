@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {KeyboardAvoidingView, Text, View, TouchableOpacity} from 'react-native';
+import {ScrollView } from 'react-native-gesture-handler';
 import styles from '../../Componente/Style';
 import DatePicker from 'react-native-datepicker';
 import firebase from '../../../Model/Firebase';
@@ -124,6 +125,7 @@ export default class ManterReserva extends Component{
         return (
           <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
             <View style={styles.infoContainer}>
+            <ScrollView>
               <Text style={styles.labelTitulo}>{this_.state.nomeEstacionamento}</Text>
               <Text style={styles.labelTitulo2}>Horário: {this_.state.estacionamento.horaAbertura} às {this_.state.estacionamento.horaFechamento}</Text>
               <Text style={styles.labelTitulo2}>Valor Hora: R$ {this_.state.estacionamento.preco}</Text>
@@ -274,7 +276,7 @@ export default class ManterReserva extends Component{
                         <Text style={styles.buttonTextLogar}>Alterar</Text>
                     </TouchableOpacity>
                 </View>    
-
+                </ScrollView>
             </View>
           </KeyboardAvoidingView>
         );

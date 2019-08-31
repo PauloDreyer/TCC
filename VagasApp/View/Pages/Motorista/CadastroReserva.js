@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {KeyboardAvoidingView, Text, View, TouchableOpacity, Switch} from 'react-native';
+import {KeyboardAvoidingView, TouchableOpacity, Text, View, Switch} from 'react-native';
+import {ScrollView } from 'react-native-gesture-handler';
 import styles from '../../Componente/Style';
 import DatePicker from 'react-native-datepicker';
 import firebase from '../../../Model/Firebase';
@@ -30,7 +31,7 @@ export default class CadastroReserva extends Component{
           vagaEspecial: 0,
           opacityVagasEspeciais: 0,
           marginTop: 0,
-          marginBottom: 20,
+          marginBottom: 30,
           opacityRota: 0,
           opacityReservar: 1,
           heightSwitch: 0,
@@ -143,6 +144,7 @@ export default class CadastroReserva extends Component{
         return (
           <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
             <View style={styles.infoContainer}>
+            <ScrollView>
               <Text style={styles.labelTitulo}>{componente.state.estacionamento.nome}</Text>
               <Text style={styles.labelTitulo2}>Horário: {componente.state.estacionamento.horaAbertura} às {componente.state.estacionamento.horaFechamento}</Text>
               <Text style={styles.labelTitulo2}>Valor Hora: R$ {componente.state.estacionamento.preco}</Text>
@@ -281,21 +283,22 @@ export default class CadastroReserva extends Component{
               </View>  
               <Text style={styles.labelCentralizado}>Total</Text>
               <Text style={styles.labelTitulo3}>R$ {componente.state.valorTotal}</Text>
-              
+              <View style ={styles.infoContainer}>
               <TouchableOpacity style={{...styles.buttonBoxRota, opacity: componente.state.opacityRota, height: componente.state.heightRota, marginTop: componente.state.marginBottom}}
                     disabled={componente.state.desabilitaRota}
                     onPress={() =>{componente.handleGetDirections()}}>
                     <IconMaterial name="directions" color={'#F1F2F3'} style={{...styles.ImageIcon, height: componente.state.heightRota}} size={componente.state.heightRota-4}/>
               </TouchableOpacity>
               <Text style={{...styles.buttonTextRota, opacity: componente.state.opacityRota, fontSize: componente.state.fontSizeRota}}>Rotas</Text>
-     
               <TouchableOpacity style={{...styles.buttonBoxReservar, opacity: componente.state.opacityReservar, height: componente.state.heightReservar, marginTop: componente.state.marginBottom}}
                               disabled={componente.state.desabilitaReserva}
                               onPress={() =>{componente.efetuarReserva()}}>
                 <Text style={styles.buttonTextLogar}>Reservar</Text>
               </TouchableOpacity>
-              
+              </View>
+              </ScrollView>
             </View>
+            
           </KeyboardAvoidingView>
         );
     }
