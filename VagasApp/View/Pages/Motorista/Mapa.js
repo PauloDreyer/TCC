@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import styles from '../../Componente/Style';
 import MapView from 'react-native-maps';
 import Url from '../../../Model/url';
 import { NavigationEvents } from 'react-navigation';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { listaEstacionamentos } from '../../../ViewModel/GerenciaMapa';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 export default class Mapa extends Component{
   constructor(props) {
     super(props);
@@ -158,11 +160,18 @@ export default class Mapa extends Component{
               pinColor={'#26A557'}
             />
           ))}
+                                
         </MapView>
         <NavigationEvents
           onDidFocus={payload => component.processa()}
         />
+        <View>
+          <TouchableOpacity style={styles.ImageIconBar}>
+            <FontAwesome name="bars" color={'#000'} size={40} />
+          </TouchableOpacity>
+        </View>
       </View>
+
     );
   }
 }

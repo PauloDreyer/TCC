@@ -504,6 +504,16 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         height: 40,
     },
+
+    ImageIconBar:{
+        marginBottom: '100%',
+        position:'relative',
+        alignSelf:'auto',
+        height: 40,
+        width: 50,
+        backgroundColor: 'red',
+        justifyContent: 'flex-start'
+    },
     
     cadastar: {
         color: '#1E273D',
