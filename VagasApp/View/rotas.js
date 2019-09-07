@@ -22,13 +22,187 @@ import TelaReservaCliente from './Pages/Estacionamento/ReservaCliente';
 import CadastroVagas from './Pages/Estacionamento/CadastroVagas';
 import TelaRegistrarEntrada from './Pages/Estacionamento/RegistrarEntrada';
 
-import { createStackNavigator, createAppContainer, createBottomTabNavigator, createDrawerNavigator} from "react-navigation";
+import { createStackNavigator, createAppContainer, createBottomTabNavigator, createDrawerNavigator, createSwitchNavigator} from "react-navigation";
 import React from 'react';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 console.disableYellowBox=true;
+
+const MotoristaTabNavigator = createBottomTabNavigator({
+  
+  Mapa: { screen: TelaMapa,
+    navigationOptions: {
+      tabBarIcon: ({ focused, tintColor }) => {
+        return <IconMaterial name="google-maps" size={32} color={tintColor}/>
+      },
+      tabBarLabel: 'Mapa',
+    },     
+  },
+  
+  MeusDados: { screen: TelaMeusDadosMotorista,
+    navigationOptions: {
+      tabBarIcon: ({ focused, tintColor }) => {
+        return <FontAwesome name="user-circle" size={28} color={tintColor}/>
+      },
+      tabBarLabel: 'Dados',    
+      fontWeight: 12,   
+    }
+  },
+
+  Historico: { screen: TelaHistoricoMotorista,
+    navigationOptions: {
+      tabBarIcon: ({ focused, tintColor }) => {
+        return <IconMaterial name="history" size={36} color={tintColor}/>
+      },
+      tabBarLabel: 'Histórico',
+    },
+  },
+  
+  MinhasReservas: { screen: TelaMinhasReservas,
+    navigationOptions: {
+      tabBarIcon: ({ focused, tintColor }) => {
+        return <IconMaterial name="garage-alert" size={42} color={tintColor}/>
+      },
+      tabBarLabel: 'Reservas',
+    }
+  },
+
+  Filtro: { screen: TelaFiltro,
+    navigationOptions: {
+      tabBarIcon: ({ focused, tintColor }) => {
+        return <IconMaterial name="filter-outline" size={36} color={tintColor}/>
+      },
+      tabBarLabel: 'Filtro',
+    }
+  },
+
+  LogOut: {
+    screen: TelaLogOut,
+    navigationOptions: {
+      tabBarIcon: ({ focused, tintColor }) => {
+        return <IconMaterial name="logout" size={36} color={tintColor}/>
+      },
+      tabBarLabel: 'Sair',
+    }
+  },
+}, 
+{
+  tabBarOptions: {
+    activeTintColor:'#37EF7D',
+    inactiveTintColor: '#CCCCCC',
+    showIcon: true,
+    showLabel: true,
+    style:{
+      backgroundColor: '#26A557',
+      height: 60,
+      marginBottom:0,
+    },
+    indicatorStyle:{
+      backgroundColor: '#F1F2F3',
+    }
+  },
+  initialRouteName: 'Mapa'
+},
+{
+  navigationOptions: {
+    header: null,
+    headerStyle: {
+      backgroundColor: '#26A557',
+      paddingTop: 20
+
+    },
+  }
+});
+
+const EstacionamentoTabNavigator = createBottomTabNavigator(
+  {
+    MeusDados: { screen: TelaMeusDadosEstacionamento,
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <FontAwesome name="user-circle" size={28} color={tintColor}/>
+        },
+        tabBarLabel: 'Meus Dados',
+      }
+    },
+
+    Historico: { screen: TelaHistoricoEstacionamento,
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <IconMaterial name="history" size={36} color={tintColor}/>
+        },
+        tabBarLabel: 'Histórico',
+      },
+    },
+
+    Home: { screen: TelaHomeEstacionamento,
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <IconAntDesign name="home" size={36} color={tintColor}/>
+        },
+        tabBarLabel: 'Home',
+      },
+    },
+
+    CadastroVaga: { screen: CadastroVagas,
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <IconMaterial name="garage" size={42} color={tintColor}/>
+        },
+        tabBarLabel: 'Vagas',
+      }
+    },
+    LogOut: {
+      screen: TelaLogOut,
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <IconMaterial name="logout" size={36} color={tintColor}/>
+        },
+        tabBarLabel: 'Sair',
+      }
+    },
+  },
+  {
+      tabBarOptions: {
+        activeTintColor:'#37EF7D',
+        inactiveTintColor: '#CCCCCC',
+        showIcon: true,
+        showLabel: true,
+        style:{
+          backgroundColor: '#26A557',
+          height: 60,
+          marginBottom:0,
+        },
+        indicatorStyle:{
+          backgroundColor: '#F1F2F3',
+        }
+      },
+      initialRouteName: 'Home'
+    },
+  {
+    navigationOptions: {
+      header: null,
+      headerStyle: {
+        backgroundColor: '#26A557',
+        height: 65,
+        paddingTop: 15
+
+      }
+    }
+  });
+
+const MotoristaDrawerNavigator = createDrawerNavigator({
+  Menu:{
+    screen: MotoristaTabNavigator,
+  }
+});
+
+const EstacionamentoDrawerNavigator = createDrawerNavigator({
+  Menu:{
+    screen: EstacionamentoTabNavigator,
+  }
+});
 
 const AppNavigator = createStackNavigator({
 
@@ -175,180 +349,20 @@ const AppNavigator = createStackNavigator({
     }
   },
 
-  HomeMotorista: { screen: createBottomTabNavigator(
-
-    {
-    
-      Mapa: { screen: TelaMapa,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <IconMaterial name="google-maps" size={32} color={tintColor}/>
-          },
-          tabBarLabel: 'Mapa',
-        },
-        
-      },
-      
-      MeusDados: { screen: TelaMeusDadosMotorista,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <FontAwesome name="user-circle" size={28} color={tintColor}/>
-          },
-          tabBarLabel: 'Dados',    
-          fontWeight: 12,   
-        }
-      },
-
-      Historico: { screen: TelaHistoricoMotorista,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <IconMaterial name="history" size={36} color={tintColor}/>
-          },
-          tabBarLabel: 'Histórico',
-        },
-      },
-      
-      MinhasReservas: { screen: TelaMinhasReservas,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <IconMaterial name="garage-alert" size={42} color={tintColor}/>
-          },
-          tabBarLabel: 'Reservas',
-        }
-      },
-
-      Filtro: { screen: TelaFiltro,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <IconMaterial name="filter-outline" size={36} color={tintColor}/>
-          },
-          tabBarLabel: 'Filtro',
-        }
-      },
-
-      LogOut: {
-        screen: TelaLogOut,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <IconMaterial name="logout" size={36} color={tintColor}/>
-          },
-          tabBarLabel: 'Sair',
-        }
-      },
-
-    }, 
-    {
-      tabBarOptions: {
-        activeTintColor:'#37EF7D',
-        inactiveTintColor: '#CCCCCC',
-        showIcon: true,
-        showLabel: true,
-        style:{
-          backgroundColor: '#26A557',
-          height: 60,
-          marginBottom:0,
-        },
-        indicatorStyle:{
-          backgroundColor: '#F1F2F3',
-        }
-      },
-      initialRouteName: 'Mapa'
-    }
-    ),
-    navigationOptions: {
-      header: null,
-      headerStyle: {
-        backgroundColor: '#26A557',
-        paddingTop: 20
-
-      },
-    },
-  },
-
-  HomeEstacionamento: { screen: createBottomTabNavigator(
-    {
-      MeusDados: { screen: TelaMeusDadosEstacionamento,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <FontAwesome name="user-circle" size={28} color={tintColor}/>
-          },
-          tabBarLabel: 'Meus Dados',
-        }
-      },
-
-      Historico: { screen: TelaHistoricoEstacionamento,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <IconMaterial name="history" size={36} color={tintColor}/>
-          },
-          tabBarLabel: 'Histórico',
-        },
-      },
-
-      Home: { screen: TelaHomeEstacionamento,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <IconAntDesign name="home" size={36} color={tintColor}/>
-          },
-          tabBarLabel: 'Home',
-        },
-      },
-
-      CadastroVaga: { screen: CadastroVagas,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <IconMaterial name="garage" size={42} color={tintColor}/>
-          },
-          tabBarLabel: 'Vagas',
-        }
-      },
-      LogOut: {
-        screen: TelaLogOut,
-        navigationOptions: {
-          tabBarIcon: ({ focused, tintColor }) => {
-            return <IconMaterial name="logout" size={36} color={tintColor}/>
-          },
-          tabBarLabel: 'Sair',
-        }
-      },
-    },
-    {
-        tabBarOptions: {
-          activeTintColor:'#37EF7D',
-          inactiveTintColor: '#CCCCCC',
-          showIcon: true,
-          showLabel: true,
-          style:{
-            backgroundColor: '#26A557',
-            height: 60,
-            marginBottom:0,
-          },
-          indicatorStyle:{
-            backgroundColor: '#F1F2F3',
-          }
-        },
-        initialRouteName: 'Home'
-      }
-    ),
-    navigationOptions: {
-      header: null,
-      headerStyle: {
-        backgroundColor: '#26A557',
-        height: 65,
-        paddingTop: 15
-
-      },
-    }
-  },
-
-  Mapa: {
-    screen: TelaMapa,
+  InicioMotorista: {
+    screen: MotoristaDrawerNavigator,
     navigationOptions: {
       header: null
     }
-  }
-},
-{
+  },
+
+  InicioEstacionamento: {
+    screen: EstacionamentoDrawerNavigator,
+    navigationOptions: {
+      header: null
+    }
+  },
+
   initialRouteName: 'Login'
 });
 

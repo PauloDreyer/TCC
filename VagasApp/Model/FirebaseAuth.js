@@ -13,10 +13,10 @@ export const signIn =(email, senha, dados)=>{
                 global.usuario.senha = senha;
                 global.logar = true;
                 if(global.usuario.tipoUsuario == 'M'){ 
-                    dados.props.navigation.navigate('HomeMotorista')
+                    dados.props.navigation.navigate('InicioMotorista')
                 }
                 else{
-                    dados.props.navigation.navigate('HomeEstacionamento')
+                    dados.props.navigation.navigate('InicioEstacionamento')
                 }
             }))
     .catch(function(error){
