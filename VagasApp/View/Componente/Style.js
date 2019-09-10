@@ -166,17 +166,12 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
 
-    inputBuscaMap:{
-        backgroundColor: '#ffffff',
+    barMap:{
         height: 45,
-        width: 300,
-        borderRadius: 10,
-        alignItems:'flex-start',
-        bottom: '85%',
-        fontWeight: 'bold',
-        fontSize: 18,
-        color: '#818185',
-    
+        width: 45,
+        alignSelf: 'flex-start',
+        marginLeft: '10%',
+        bottom: '85%'
     },
 
     //Buttons
@@ -503,16 +498,6 @@ const styles = StyleSheet.create({
     ImageIcon:{
         alignSelf:'center',
         height: 40,
-    },
-
-    ImageIconBar:{
-        marginBottom: '100%',
-        position:'relative',
-        alignSelf:'auto',
-        height: 40,
-        width: 50,
-        backgroundColor: 'red',
-        justifyContent: 'flex-start'
     },
     
     cadastar: {
