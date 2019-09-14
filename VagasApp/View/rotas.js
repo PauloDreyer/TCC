@@ -28,6 +28,7 @@ import React from 'react';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import styles from './Componente/Style';
 
 console.disableYellowBox=true;
 
@@ -94,7 +95,7 @@ const MotoristaTabNavigator = createBottomTabNavigator({
       backgroundColor: '#F1F2F3',
     }
   },
-  initialRouteName: 'Mapa'
+  initialRouteName: 'Mapa',
 },
 {
   navigationOptions: {
@@ -188,9 +189,9 @@ const MotoristaDrawerNavigator = createDrawerNavigator({
   Menu:{
     screen: MotoristaTabNavigator,
     navigationOptions: {
-      drawerLabel: " ",
+      tintColor: '#F1F2F3',
+      activeTintColor: '#F1F2F3',
     }, 
-    height: 200,
   },
 
   Mapa:{
@@ -198,7 +199,7 @@ const MotoristaDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Mapa",
       drawerIcon: () => {
-        return <IconMaterial name="google-maps" size={46} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+        return <IconMaterial name="google-maps" size={46} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
       },
     }, 
   },
@@ -208,7 +209,7 @@ const MotoristaDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Meus Dados",
       drawerIcon: () => {
-        return <FontAwesome name="user-circle" size={38} color={'#000'} style={{width: 40, marginLeft: 20}}/>
+        return <FontAwesome name="user-circle" size={38} color={'#2A81D3'} style={{width: 40, marginLeft: 20}}/>
       },
     }, 
   },
@@ -218,7 +219,7 @@ const MotoristaDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Histórico",
       drawerIcon: () => {
-        return <IconMaterial name="history" size={46} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+        return <IconMaterial name="history" size={46} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
       },
     }, 
   },
@@ -228,7 +229,7 @@ const MotoristaDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Minhas Reservas",
       drawerIcon: () => {
-        return <IconMaterial name="garage-alert" size={46} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+        return <IconMaterial name="garage-alert" size={46} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
       },
     }, 
   },
@@ -238,7 +239,7 @@ const MotoristaDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Filtros",
       drawerIcon: () => {
-        return <IconMaterial name="filter-outline" size={46} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+        return <IconMaterial name="filter-outline" size={46} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
       },
     }, 
   },
@@ -248,34 +249,38 @@ const MotoristaDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Sair",
       drawerIcon: () => {
-        return <IconMaterial name="logout" size={46} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+        return <IconMaterial name="logout" size={46} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
       },
     }, 
   }
 },
 {
+  
+initialRouteName: "Menu",
+  
 contentOptions: {
-  activeTintColor: '#26A557',
-  inactiveTintColor: '#000',
+  activeTintColor: '#F1F2F3',
+  activeBackgroundColor: '#F1F2F3',
+  inactiveTintColor: '#26A557',
   itemsContainerStyle: {
-    marginVertical: 0,
+    paddingTop: 0,
   },
   iconContainerStyle: {
     opacity: 1
   }
 },
-  headerMode: 'float',
-  drawerBackgroundColor: '#F1F2F3'
+
+  drawerBackgroundColor: '#F1F2F3',
+  
 });
 
 const EstacionamentoDrawerNavigator = createDrawerNavigator({
   Menu:{
     screen: EstacionamentoTabNavigator,
     navigationOptions: {
-      title: " Estacionamento",
-      fontWeight: 30
-    }, 
-    height: 200,
+      tintColor: '#F1F2F3',
+      activeTintColor: '#F1F2F3',
+    } 
   },
 
   MeusDados:{
@@ -283,7 +288,7 @@ const EstacionamentoDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Meus Dados",
       drawerIcon: () => {
-        return <FontAwesome name="user-circle" size={38} color={'#000'} style={{width: 40, marginLeft: 20}}/>
+        return <FontAwesome name="user-circle" size={38} color={'#2A81D3'} style={{width: 40, marginLeft: 20}}/>
       },
     }, 
   },
@@ -293,7 +298,7 @@ const EstacionamentoDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Histórico",
       drawerIcon: () => {
-        return <IconMaterial name="history" size={46} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+        return <IconMaterial name="history" size={46} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
       },
     }, 
   },
@@ -303,7 +308,7 @@ const EstacionamentoDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Home",
       drawerIcon: () => {
-        return <IconAntDesign name="home" size={36} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+        return <IconAntDesign name="home" size={36} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
       },
     },
   },
@@ -313,7 +318,7 @@ const EstacionamentoDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Vagas",
       drawerIcon: () => {
-        return <IconMaterial name="garage" size={42} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+        return <IconMaterial name="garage" size={42} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
       },
     }
   },
@@ -323,24 +328,28 @@ const EstacionamentoDrawerNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: "Sair",
       drawerIcon: () => {
-        return <IconMaterial name="logout" size={46} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+        return <IconMaterial name="logout" size={46} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
       },
     }, 
   }
 },
+
 {
-contentOptions: {
-  activeTintColor: '#26A557',
-  inactiveTintColor: '#000',
-  itemsContainerStyle: {
-    marginVertical: 0,
+  initialRouteName: "Menu",
+
+  contentOptions: {
+    activeTintColor: '#F1F2F3',
+    activeBackgroundColor: '#F1F2F3',
+    inactiveTintColor: '#26A557',
+    itemsContainerStyle: {
+      paddingTop: 0,
+    },
+    iconContainerStyle: {
+      opacity: 1
+    }
   },
-  iconContainerStyle: {
-    opacity: 1
-  }
-},
-  headerMode: 'float',
-  drawerBackgroundColor: '#F1F2F3'
+  
+    drawerBackgroundColor: '#F1F2F3',
 });
 
 const AppNavigator = createStackNavigator({
