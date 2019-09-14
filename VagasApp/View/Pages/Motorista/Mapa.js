@@ -166,8 +166,8 @@ export default class Mapa extends Component{
           onDidFocus={payload => component.processa()}
         />
         <View style={styles.barMap}>
-          <TouchableOpacity >
-            <FontAwesome name="bars" color={'#26A557'} size={40} />
+          <TouchableOpacity onPress={() =>{component.props.navigation.openDrawer()}}>
+            <FontAwesome name="bars" color={'#848484'} size={40} />
           </TouchableOpacity>
         </View>
       </View>

@@ -19,9 +19,10 @@ import TelaHomeEstacionamento from './Pages/Estacionamento/HomeEstacionamento';
 import TelaMeusDadosEstacionamento from './Pages/Estacionamento/ManterDadosEstacionamento';
 import TelaHistoricoEstacionamento from './Pages/Estacionamento/HistoricoEstacionamento';
 import TelaReservaCliente from './Pages/Estacionamento/ReservaCliente';
-import CadastroVagas from './Pages/Estacionamento/CadastroVagas';
+import TelaCadastroVagas from './Pages/Estacionamento/CadastroVagas';
 import TelaRegistrarEntrada from './Pages/Estacionamento/RegistrarEntrada';
 
+//
 import { createStackNavigator, createAppContainer, createBottomTabNavigator, createDrawerNavigator, drawerIcon} from "react-navigation";
 import React from 'react';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -135,7 +136,7 @@ const EstacionamentoTabNavigator = createBottomTabNavigator(
       },
     },
 
-    CadastroVaga: { screen: CadastroVagas,
+    CadastroVaga: { screen: TelaCadastroVagas,
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
           return <IconMaterial name="garage" size={42} color={tintColor}/>
@@ -180,7 +181,8 @@ const EstacionamentoTabNavigator = createBottomTabNavigator(
 
       }
     }
-  });
+  }
+);
 
 const MotoristaDrawerNavigator = createDrawerNavigator({
   Menu:{
@@ -250,7 +252,6 @@ const MotoristaDrawerNavigator = createDrawerNavigator({
       },
     }, 
   }
-
 },
 {
 contentOptions: {
@@ -265,14 +266,81 @@ contentOptions: {
 },
   headerMode: 'float',
   drawerBackgroundColor: '#F1F2F3'
-}
-);
+});
 
 const EstacionamentoDrawerNavigator = createDrawerNavigator({
   Menu:{
     screen: EstacionamentoTabNavigator,
+    navigationOptions: {
+      title: " Estacionamento",
+      fontWeight: 30
+    }, 
+    height: 200,
   },
 
+  MeusDados:{
+    screen: TelaMeusDadosEstacionamento,
+    navigationOptions: {
+      drawerLabel: "Meus Dados",
+      drawerIcon: () => {
+        return <FontAwesome name="user-circle" size={38} color={'#000'} style={{width: 40, marginLeft: 20}}/>
+      },
+    }, 
+  },
+
+  Historico:{
+    screen: TelaHistoricoEstacionamento,
+    navigationOptions: {
+      drawerLabel: "Histórico",
+      drawerIcon: () => {
+        return <IconMaterial name="history" size={46} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+      },
+    }, 
+  },
+
+  Home: {
+    screen: TelaHomeEstacionamento,
+    navigationOptions: {
+      drawerLabel: "Home",
+      drawerIcon: () => {
+        return <IconAntDesign name="home" size={36} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+      },
+    },
+  },
+
+  CadastroVaga: { 
+    screen: TelaCadastroVagas,
+    navigationOptions: {
+      drawerLabel: "Vagas",
+      drawerIcon: () => {
+        return <IconMaterial name="garage" size={42} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+      },
+    }
+  },
+
+  Sair:{
+    screen: TelaLogOut,
+    navigationOptions: {
+      drawerLabel: "Sair",
+      drawerIcon: () => {
+        return <IconMaterial name="logout" size={46} color={'#000'} style={{width: 50, marginLeft: 20}}/>
+      },
+    }, 
+  }
+},
+{
+contentOptions: {
+  activeTintColor: '#26A557',
+  inactiveTintColor: '#000',
+  itemsContainerStyle: {
+    marginVertical: 0,
+  },
+  iconContainerStyle: {
+    opacity: 1
+  }
+},
+  headerMode: 'float',
+  drawerBackgroundColor: '#F1F2F3'
 });
 
 const AppNavigator = createStackNavigator({
