@@ -113,10 +113,10 @@ export const alterarCadastroEstacionamento = (dados)=>{
 
 export const alterarSenha = async(email, senha, contraSenha)=>{
     let valido = 'true';
-    if(senha != contraSenha){
+   /* if(senha != contraSenha){
         valido = false;
         ToastAndroid.showWithGravity('Ops! As senhas com conferem!', ToastAndroid.SHORT, ToastAndroid.CENTER);
-    } 
+    } */
     
     if(valido == 'true'){
         return new Promise((resolve, reject) => {
