@@ -1,5 +1,0 @@
-import blockchain
-
-# minerado paulo-coin
-for coin in blockchain:
-  print(paulocoin)
