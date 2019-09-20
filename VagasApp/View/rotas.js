@@ -110,24 +110,6 @@ const MotoristaTabNavigator = createBottomTabNavigator({
 
 const EstacionamentoTabNavigator = createBottomTabNavigator(
   {
-    MeusDados: { screen: TelaMeusDadosEstacionamento,
-      navigationOptions: {
-        tabBarIcon: ({ focused, tintColor }) => {
-          return <FontAwesome name="user-circle" size={28} color={tintColor}/>
-        },
-        tabBarLabel: 'Meus Dados',
-      }
-    },
-
-    Historico: { screen: TelaHistoricoEstacionamento,
-      navigationOptions: {
-        tabBarIcon: ({ focused, tintColor }) => {
-          return <IconMaterial name="history" size={36} color={tintColor}/>
-        },
-        tabBarLabel: 'Histórico',
-      },
-    },
-
     Home: { screen: TelaHomeEstacionamento,
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
@@ -145,14 +127,23 @@ const EstacionamentoTabNavigator = createBottomTabNavigator(
         tabBarLabel: 'Vagas',
       }
     },
-    LogOut: {
-      screen: TelaLogOut,
+
+    MeusDados: { screen: TelaMeusDadosEstacionamento,
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
-          return <IconMaterial name="logout" size={36} color={tintColor}/>
+          return <FontAwesome name="user-circle" size={28} color={tintColor}/>
         },
-        tabBarLabel: 'Sair',
+        tabBarLabel: 'Meus Dados',
       }
+    },
+
+    Historico: { screen: TelaHistoricoEstacionamento,
+      navigationOptions: {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <IconMaterial name="history" size={36} color={tintColor}/>
+        },
+        tabBarLabel: 'Histórico',
+      },
     },
   },
   {
@@ -283,26 +274,6 @@ const EstacionamentoDrawerNavigator = createDrawerNavigator({
     } 
   },
 
-  MeusDados:{
-    screen: TelaMeusDadosEstacionamento,
-    navigationOptions: {
-      drawerLabel: "Meus Dados",
-      drawerIcon: () => {
-        return <FontAwesome name="user-circle" size={38} color={'#2A81D3'} style={{width: 40, marginLeft: 20}}/>
-      },
-    }, 
-  },
-
-  Historico:{
-    screen: TelaHistoricoEstacionamento,
-    navigationOptions: {
-      drawerLabel: "Histórico",
-      drawerIcon: () => {
-        return <IconMaterial name="history" size={46} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
-      },
-    }, 
-  },
-
   Home: {
     screen: TelaHomeEstacionamento,
     navigationOptions: {
@@ -321,6 +292,26 @@ const EstacionamentoDrawerNavigator = createDrawerNavigator({
         return <IconMaterial name="garage" size={42} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
       },
     }
+  },
+  
+  MeusDados:{
+    screen: TelaMeusDadosEstacionamento,
+    navigationOptions: {
+      drawerLabel: "Meus Dados",
+      drawerIcon: () => {
+        return <FontAwesome name="user-circle" size={38} color={'#2A81D3'} style={{width: 40, marginLeft: 20}}/>
+      },
+    }, 
+  },
+
+  Historico:{
+    screen: TelaHistoricoEstacionamento,
+    navigationOptions: {
+      drawerLabel: "Histórico",
+      drawerIcon: () => {
+        return <IconMaterial name="history" size={46} color={'#2A81D3'} style={{width: 50, marginLeft: 20}}/>
+      },
+    }, 
   },
 
   Sair:{
