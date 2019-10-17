@@ -42,6 +42,7 @@ export const atualizarDadosEstacionamento =(id, dados)=>{
 }
 
 export const atualizarVagas =(id, dados, vagaEspecial, status, tipo)=>{
+
     let vagasEsp = 0;
     let vagasNormais = 0;
 
@@ -52,6 +53,14 @@ export const atualizarVagas =(id, dados, vagaEspecial, status, tipo)=>{
     else if(vagaEspecial == 0 &&
             tipo == 'I'){
         vagasNormais = 1;
+    }
+    else if(vagaEspecial == 1 &&
+        tipo == 'S'){
+        vagasEsp = -1;
+    }
+    else if(vagaEspecial == 0 &&
+             tipo == 'S'){
+         vagasNormais = -1;
     }
 
     if(status == 'C' && 

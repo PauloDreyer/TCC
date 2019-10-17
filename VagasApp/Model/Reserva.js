@@ -28,6 +28,7 @@ const existeReserva =async (dados)=>{
 
 export const insereReserva = async(dados)=>{
     global.registrouReserva = false;
+    
     let retorno = await existeReserva(dados);
 
     setTimeout(function(){
@@ -51,7 +52,10 @@ export const insereReserva = async(dados)=>{
             placa: dados.placa,
             vagaEspecial: vagaEspecial,
             status: "A",
-            pago: "N"
+            pago: "N",
+            statusEntSai: "",
+            horaEntradaRegistrada: "",
+            horaSaidaRegistrada: "",
         });
         atualizarVagas(dados.keyEstacionamentoVagas, dados.estacionamento, vagaEspecial,'', 'I');
         ToastAndroid.showWithGravity('Reserva Efetuada!', ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -62,6 +66,7 @@ export const insereReserva = async(dados)=>{
 
 export const atualizarReserva =async(dados, status)=>{
     let statusReserva = '';
+    let tipo = 'U';
     chave = dados.key;
     let retorno = await existeReserva(dados);
 
@@ -71,6 +76,11 @@ export const atualizarReserva =async(dados, status)=>{
     else{
         statusReserva = dados.status;
     }
+
+    if(status == 'S'){
+        tipo = status;
+    }
+
     setTimeout(function(){
         if(insere){
             reserva.child(dados.key).set({
@@ -86,10 +96,18 @@ export const atualizarReserva =async(dados, status)=>{
                 status: statusReserva,
                 placa: dados.placa,
                 vagaEspecial: dados.vagaEspecial,
-                pago: dados.pago
+                pago: dados.pago,
+                statusEntSai: dados.statusEntSai,
+                horaEntradaRegistrada: "",
+                horaSaidaRegistrada: "",
             });
-    
-            atualizarVagas(dados.keyEstacionamentoVagas, dados.estacionamento, dados.vagaEspecial, statusReserva, 'U');
+            
+            if(global.estacionamento.id != ''){
+                dados.keyEstacionamentoVagas = global.estacionamento.id;
+                dados.estacionamento = global.estacionamento;
+            }
+            
+            atualizarVagas(dados.keyEstacionamentoVagas, dados.estacionamento, dados.vagaEspecial, statusReserva, tipo);
     
             if(status ==''){
                 ToastAndroid.showWithGravity('Reserva Alterada!', ToastAndroid.SHORT, ToastAndroid.CENTER);

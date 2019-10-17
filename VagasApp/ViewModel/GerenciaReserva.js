@@ -71,24 +71,37 @@ export const liberarEntrada=async (key)=>{
     let hoje = dd.padStart(2, "0") + '/' + mm.padStart(2, "0") + '/' + yy;
     let horaAtual =  h.padStart(2,"0")+':'+mi.padStart(2,"0");
     let retorno = [];
-   await consultaReserva(key)
-   .then((result) =>{
-        retorno = {result, status: 'Rejeitado!'};
-       if(result.dataEntrada != hoje){
-            ToastAndroid.showWithGravity('Data da reserva difere da data atual!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+    return new Promise((resolve) =>{
+        consultaReserva(key)
+        .then((result) =>{
             retorno = {result, status: 'Rejeitado!'};
-        }
-        else if(horaAtual < result.horaEntrada){
-            ToastAndroid.showWithGravity('Horário de Entrada fora do horário reservado!', ToastAndroid.SHORT, ToastAndroid.CENTER);
-            retorno = {result, status: 'Rejeitado!'};
-        }
-        else if(horaAtual > result.horaSaida){
-            ToastAndroid.showWithGravity('Horário de Entrada fora do horário reservado!', ToastAndroid.SHORT, ToastAndroid.CENTER);
-            retorno = {result, status: 'Rejeitado!'};
-        }
-        else{
-            retorno = {result, status: 'Liberado!'};
-        }       
-   })
-   return retorno;
+            if(1 != 1){
+                console.log('oi')
+            }
+            /*if(result.dataEntrada != hoje){
+                ToastAndroid.showWithGravity('Data da reserva difere da data atual!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+                retorno = {result, status: 'Rejeitado!'};
+            }
+            else if(horaAtual < result.horaEntrada){
+                ToastAndroid.showWithGravity('Horário de Entrada fora do horário reservado!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+                retorno = {result, status: 'Rejeitado!'};
+            }
+            else if(horaAtual > result.horaSaida){
+                ToastAndroid.showWithGravity('Horário de Entrada fora do horário reservado!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+                retorno = {result, status: 'Rejeitado!'};
+            }*/
+            else{
+                if(result.statusEntSai == 'E'){
+                    result.statusEntSai = 'S'
+                }
+                else{
+                    result.statusEntSai = 'E'
+                }
+                retorno = {result, status: 'Liberado!'};
+                retorno.result.key = key;
+                atualizarReserva(retorno.result, 'S');
+            }     
+            resolve(retorno);  
+        })
+    })
 }

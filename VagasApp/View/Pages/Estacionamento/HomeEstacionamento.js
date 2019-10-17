@@ -24,6 +24,10 @@ export default class HomeEstacionamento extends Component{
     comp.setState({
         dataConsulta: comp.hoje,
     });
+    let ref = firebase.database().ref("estacionamento");
+    ref.orderByChild("key").equalTo(global.usuario.key).on("child_added", function(snapshot) {
+        global.estacionamento = {id: snapshot.key,  ...snapshot.toJSON()}
+    });
     
 }
 
@@ -57,6 +61,7 @@ atualizar=()=>{
         comp.setState({reservas: [...comp.state.reservas, {key: snapshot.key, ...snapshot.toJSON()}]});
     }
   });
+
 }
 
 irParaReserva=(reserva)=>{

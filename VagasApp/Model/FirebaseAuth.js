@@ -93,7 +93,6 @@ export const enviarEmailRedefinicaoSenha = async(email)=>{
             ToastAndroid.showWithGravity('Email Enviado!', ToastAndroid.SHORT, ToastAndroid.CENTER);
             resolve();
           }).catch(function(error) {
-            console.log(error);
             reject();
           });    
     });    

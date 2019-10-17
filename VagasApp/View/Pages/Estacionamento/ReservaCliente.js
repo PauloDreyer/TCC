@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {KeyboardAvoidingView, Text, View, TouchableOpacity} from 'react-native';
 import styles from '../../Componente/Style';
-import DatePicker from 'react-native-datepicker';
 import firebase from '../../../Model/Firebase';
 import {atualizarReseva} from '../../../ViewModel/GerenciaReserva';
-import getDirections from 'react-native-google-maps-directions';
-import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class ReservaCliente extends Component{
     constructor(props){

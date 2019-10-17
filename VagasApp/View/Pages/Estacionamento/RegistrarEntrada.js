@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {View, Text} from "react-native";
 import QRCodeScanner from "react-native-qrcode-scanner";
-import { NavigationEvents } from 'react-navigation';
+import {TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from '../../Componente/Style';
 import {liberarEntrada} from '../../../ViewModel/GerenciaReserva';
@@ -27,7 +27,7 @@ export default class RegistrarEntrada extends Component {
     scanner = '';
 
     validarEntrada = async(e) => {
-        let retorno = await liberarEntrada(e.data);
+        let retorno = await liberarEntrada(/*e.data*/'-Lr-jn4Q-leQYSJWPPP8');
         this_.setState({
             nomeMotorista: 'Nome: ' + retorno.result.nomeMotorista,
             placa: 'Placa: ' + retorno.result.placa,
@@ -39,16 +39,16 @@ export default class RegistrarEntrada extends Component {
         });
 
         if(retorno.status == 'Liberado!'){
-        this_.setState({
-            success: true,
-            color: '#26A557',
-        });   
+            this_.setState({
+                success: true,
+                color: '#26A557',
+            });   
         }
         else{
-        this_.setState({
-            success: false,
-            color: '#D63230',
-        });   
+            this_.setState({
+                success: false,
+                color: '#D63230',
+            });   
         }
     };
 
@@ -87,6 +87,10 @@ export default class RegistrarEntrada extends Component {
                     }
                     ref={(elem) => { this_.scanner = elem }}
                 />
+                    <TouchableOpacity style={styles.buttonBoxConfirmar}
+                                        onPress={this_.validarEntrada}>
+                        <Text style={styles.buttonTextLogar}>Salvar</Text>
+                    </TouchableOpacity> 
             </View>
         );
     }
