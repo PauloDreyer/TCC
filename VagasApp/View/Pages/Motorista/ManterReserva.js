@@ -4,7 +4,7 @@ import {ScrollView } from 'react-native-gesture-handler';
 import styles from '../../Componente/Style';
 import DatePicker from 'react-native-datepicker';
 import firebase from '../../../Model/Firebase';
-import {atualizarReseva, irValidarEntrada} from '../../../ViewModel/GerenciaReserva';
+import {atualizarReseva, irValidarEntrada, irAvaliacao} from '../../../ViewModel/GerenciaReserva';
 import getDirections from 'react-native-google-maps-directions';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -30,6 +30,7 @@ export default class ManterReserva extends Component{
             vagaEspecial: 0,
             desabilita: false,
             statusEntSai: '',
+			      avaliado: '',
             texto: '',
 
             estacionamento: [],
@@ -75,6 +76,7 @@ export default class ManterReserva extends Component{
                 valor: Number(global.reserva.valor).toFixed(2),
                 vagaEspecial: global.reserva.vagaEspecial,
                 statusEntSai: global.reserva.statusEntSai,
+				        avaliado: global.reserva.avaliado,
 
                 dataEntradaAux: global.reserva.dataEntrada.split('/').reverse().join('/'),
                 dataSaidaAux: global.reserva.dataSaida.split('/').reverse().join('/'),
@@ -101,8 +103,12 @@ export default class ManterReserva extends Component{
       let retorno =atualizarReseva(this_.state, '')
     }
 
-    irParaValidaEntrada=()=>{
-      irValidarEntrada(this_);
+    irPara=()=>{
+      if(this_.state.statusEntSai =='S'){
+        irAvaliacao(this_);
+      }else{
+        irValidarEntrada(this_);
+      }
     }
 
     handleGetDirections = () => {
@@ -278,7 +284,7 @@ export default class ManterReserva extends Component{
               <Text style={styles.buttonTextRota}>Rotas</Text>
               
               <TouchableOpacity 
-                    onPress={() =>{this_.irParaValidaEntrada()}}>
+                    onPress={() =>{this_.irPara()}}>
                     <View style={styles.viewRow}>
                       <Text style={styles.labelTitulo5}>{this_.state.texto}</Text>
                     </View>

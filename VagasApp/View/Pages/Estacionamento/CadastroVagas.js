@@ -24,6 +24,8 @@ export default class CadastroVagas extends Component {
             horaAbertura: '',
             horaFechamento: '',
             avaliacao: 0,
+            totalAvaliacao: 0,
+            qtdeAvaliacao: 0,
             latitude: 0,
             longitude: 0
         };
@@ -51,6 +53,8 @@ export default class CadastroVagas extends Component {
                     cidade: component.estacionamentos.cidade,
                     estado: component.estacionamentos.estado,
                     avaliacao: component.estacionamentos.avaliacao,
+                    totalAvaliacao: component.estacionamentos.totalAvaliacao,
+                    qtdeAvaliacao: component.estacionamentos.qtdeAvaliacao,
                     latitude: component.estacionamentos.latitude,
                     longitude: component.estacionamentos.longitude,
                     horaAbertura: component.estacionamentos.horaAbertura,

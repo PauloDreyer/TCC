@@ -4,6 +4,7 @@ import TelaEsqueciMinhaSenha from './Pages/EsqueciMinhaSenha';
 
 //Views Motorista
 import TelaValidarEntrada from './Pages/Motorista/ValidarEntrada';
+import TelaAvaliacao from './Pages/Motorista/Avaliacao';
 import TelaCadastroMotorista from './Pages/Motorista/CadastroMotorista';
 import TelaMapa from './Pages/Motorista/Mapa';
 import TelaHistoricoMotorista from './Pages/Motorista/HistoricoMotorista';
@@ -390,6 +391,23 @@ const AppNavigator = createStackNavigator({
     screen: TelaValidarEntrada,
     navigationOptions: {
       title: 'Validar Entrada',
+      headerStyle: {
+        backgroundColor: '#26A557',
+        height: 65,
+        paddingTop: 15
+
+      },
+      headerTintColor: '#F1F2F3',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }
+  },
+
+  Avaliacao: {
+    screen: TelaAvaliacao,
+    navigationOptions: {
+      title: 'Avaliar Estacionamento',
       headerStyle: {
         backgroundColor: '#26A557',
         height: 65,

@@ -54,8 +54,10 @@ export const insereReserva = async(dados)=>{
             status: "A",
             pago: "N",
             statusEntSai: "",
+            avaliado: "",
             horaEntradaRegistrada: "",
             horaSaidaRegistrada: "",
+            avaliado: "N"
         });
         atualizarVagas(dados.keyEstacionamentoVagas, dados.estacionamento, vagaEspecial,'', 'I');
         ToastAndroid.showWithGravity('Reserva Efetuada!', ToastAndroid.SHORT, ToastAndroid.CENTER);
@@ -98,21 +100,25 @@ export const atualizarReserva =async(dados, status)=>{
                 vagaEspecial: dados.vagaEspecial,
                 pago: dados.pago,
                 statusEntSai: dados.statusEntSai,
+                avaliado: dados.avaliado,
                 horaEntradaRegistrada: "",
                 horaSaidaRegistrada: "",
+                avaliado: dados.avaliado
             });
             
             if(global.estacionamento.id != ''){
                 dados.keyEstacionamentoVagas = global.estacionamento.id;
                 dados.estacionamento = global.estacionamento;
             }
+            if(status != 'X'){
+                atualizarVagas(dados.keyEstacionamentoVagas, dados.estacionamento, dados.vagaEspecial, statusReserva, tipo);
+            }
             
-            atualizarVagas(dados.keyEstacionamentoVagas, dados.estacionamento, dados.vagaEspecial, statusReserva, tipo);
     
             if(status ==''){
                 ToastAndroid.showWithGravity('Reserva Alterada!', ToastAndroid.SHORT, ToastAndroid.CENTER);
             }
-            else{
+            else if(status =='C'){
                 ToastAndroid.showWithGravity('Reserva Cancelada!', ToastAndroid.SHORT, ToastAndroid.CENTER);
             }
         }

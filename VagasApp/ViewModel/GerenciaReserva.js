@@ -1,4 +1,5 @@
 import {insereReserva, atualizarReserva, consultaReserva} from '../Model/Reserva';
+import {calcularMediaAvaliacao} from './GerenciaEstacionamento';
 import {ToastAndroid} from 'react-native';
 
 export const registrarResevar= async (dados)=>{
@@ -52,7 +53,18 @@ export const atualizarReseva=async (dados, status)=>{
 }
 
 export const irValidarEntrada=(dados)=>{
-    dados.props.navigation.navigate('ValidarEntrada',{keyReserva: dados.state.key});
+    dados.props.navigation.navigate('ValidarEntrada', {keyReserva: dados.state.key});
+}
+
+export const irAvaliacao=(dados)=>{
+    dados.props.navigation.navigate('Avaliacao', {estacionamento: dados.state.estacionamento});
+}
+
+export const avaliarReserva=async(dados, dadosEstacionamento, valorAvaliacao)=>{
+    console.log(dados);
+    calcularMediaAvaliacao(dados.keyEstacionamento, dadosEstacionamento, valorAvaliacao);
+    dados.avaliado = 'S';
+    await atualizarReserva(dados, 'X');
 }
 
 export const liberarEntrada=async (key)=>{
@@ -67,6 +79,7 @@ export const liberarEntrada=async (key)=>{
     let mm = m+'';
     let h = hh+'';
     let mi = min+'';
+    let espera = false;
 
     let hoje = dd.padStart(2, "0") + '/' + mm.padStart(2, "0") + '/' + yy;
     let horaAtual =  h.padStart(2,"0")+':'+mi.padStart(2,"0");
@@ -75,10 +88,8 @@ export const liberarEntrada=async (key)=>{
         consultaReserva(key)
         .then((result) =>{
             retorno = {result, status: 'Rejeitado!'};
-            if(1 != 1){
-                console.log('oi')
-            }
-            /*if(result.dataEntrada != hoje){
+
+            if(result.dataEntrada != hoje){
                 ToastAndroid.showWithGravity('Data da reserva difere da data atual!', ToastAndroid.SHORT, ToastAndroid.CENTER);
                 retorno = {result, status: 'Rejeitado!'};
             }
@@ -89,7 +100,7 @@ export const liberarEntrada=async (key)=>{
             else if(horaAtual > result.horaSaida){
                 ToastAndroid.showWithGravity('Horário de Entrada fora do horário reservado!', ToastAndroid.SHORT, ToastAndroid.CENTER);
                 retorno = {result, status: 'Rejeitado!'};
-            }*/
+            }
             else{
                 if(result.statusEntSai == 'E'){
                     result.statusEntSai = 'S'
@@ -99,7 +110,7 @@ export const liberarEntrada=async (key)=>{
                 }
                 retorno = {result, status: 'Liberado!'};
                 retorno.result.key = key;
-                atualizarReserva(retorno.result, 'S');
+                atualizarReserva(retorno.result, result.statusEntSai);
             }     
             resolve(retorno);  
         })

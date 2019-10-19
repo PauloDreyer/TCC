@@ -15,6 +15,8 @@ export const insereEstacionamento = (key, nome, cidade, estado, latitude, longit
             cidade: cidade,
             estado: estado,
             avaliacao: 0,
+            totalAvaliacao: 0,
+            qtdeAvaliacao: 0,
             latitude: latitude,
             longitude: longitude
         });
@@ -34,6 +36,8 @@ export const atualizarDadosEstacionamento =(id, dados)=>{
         cidade: dados.cidade,
         estado: dados.estado,
         avaliacao: dados.avaliacao,
+        totalAvaliacao: dados.totalAvaliacao,
+        qtdeAvaliacao: dados.qtdeAvaliacao,
         latitude: dados.latitude,
         longitude: dados.longitude,
         horaAbertura: dados.horaAbertura,
@@ -83,6 +87,8 @@ export const atualizarVagas =(id, dados, vagaEspecial, status, tipo)=>{
         cidade: dados.cidade,
         estado: dados.estado,
         avaliacao: dados.avaliacao,
+        totalAvaliacao: dados.totalAvaliacao,
+        qtdeAvaliacao: dados.qtdeAvaliacao,
         latitude: dados.latitude,
         longitude: dados.longitude,
         horaAbertura: dados.horaAbertura,
