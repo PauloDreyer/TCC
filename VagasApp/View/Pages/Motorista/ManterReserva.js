@@ -28,6 +28,9 @@ export default class ManterReserva extends Component{
             placa: '',
             keyEstacionamentoVagas: '',
             vagaEspecial: 0,
+            desabilita: false,
+            statusEntSai: '',
+            texto: '',
 
             estacionamento: [],
             dataEntradaAux: '',
@@ -48,6 +51,13 @@ export default class ManterReserva extends Component{
         let datamax = dd.padStart(2, "0") + '/' + mm.padStart(2, "0") + '/' + y;
         this_.maxData = datamax;
 
+        if(global.permiteCancelar == 0){
+          this_.setState({desabilita: true});
+        }
+        else{
+          this_.setState({desabilita: false});
+        }
+        
         if(global.reserva.key !=''){
             this_.setState({
                 key: global.reserva.key,
@@ -64,11 +74,19 @@ export default class ManterReserva extends Component{
                 placa: global.reserva.placa,
                 valor: Number(global.reserva.valor).toFixed(2),
                 vagaEspecial: global.reserva.vagaEspecial,
+                statusEntSai: global.reserva.statusEntSai,
 
                 dataEntradaAux: global.reserva.dataEntrada.split('/').reverse().join('/'),
                 dataSaidaAux: global.reserva.dataSaida.split('/').reverse().join('/'),
-              });
+            });
         }
+
+        if(global.reserva.statusEntSai == 'S'){
+          this_.setState({texto: 'Avaliar Estacionamento'})
+        }else{
+          this_.setState({texto: 'Validar Entrada'})
+        }
+
         let ref = firebase.database().ref("estacionamento");
         ref.orderByChild("key").equalTo(global.reserva.keyEstacionamento).on("child_added", function(snapshot) {
           this_.setState({estacionamento: snapshot.toJSON(), keyEstacionamentoVagas: snapshot.key});  
@@ -262,20 +280,22 @@ export default class ManterReserva extends Component{
               <TouchableOpacity 
                     onPress={() =>{this_.irParaValidaEntrada()}}>
                     <View style={styles.viewRow}>
-                    <Text style={styles.labelTitulo5}>Validar Entrada</Text>
+                      <Text style={styles.labelTitulo5}>{this_.state.texto}</Text>
                     </View>
               </TouchableOpacity>
 
-                <View style={{...styles.viewRow,opacity:  global.permiteCancelar}}>
+                  <View style={{...styles.viewRow, opacity:  global.permiteCancelar}}>
                     <TouchableOpacity style={styles.buttonBoxCancelar}
-                                onPress={() =>{this_.setState({status: "C"}),this_.cancelarReserva()}}>
+                                disabled={this_.state.desabilita}
+                                onPress={() =>{this_.setState({status: "C"}), this_.cancelarReserva()}}>
                         <Text style={styles.buttonTextLogar}>Cancelar</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.buttonBoxAlterar}
+                                disabled={this_.state.desabilita}
                                 onPress={() =>{this_.alterarReserva()}}>
                         <Text style={styles.buttonTextLogar}>Alterar</Text>
                     </TouchableOpacity>
-                </View>    
+                  </View>    
                 </ScrollView>
             </View>
           </KeyboardAvoidingView>

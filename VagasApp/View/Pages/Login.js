@@ -90,7 +90,7 @@ export default class Login extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('MinhaSenha')}>
-                        <Text style={styles.cadastar}>Esqueci minha Senha</Text>
+                        <Text style={styles.cadastar}>Esqueci minha senha</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('CadastroMotorista')}>
