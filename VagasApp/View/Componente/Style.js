@@ -567,8 +567,20 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#26A557',
         alignSelf:'center'
-      },
-    
+    },
+
+    filtroAvaliacao:{
+        marginTop: 10,
+        padding: 15,
+        height: 107,
+        width: '85%',
+        marginLeft: 20,
+        marginRight: 20,
+        borderRadius: 10,
+        backgroundColor: '#26A557',
+        alignSelf:'center'
+    },
+
     filtroCidade:{
         marginTop: 10,
         padding: 15,

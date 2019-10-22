@@ -65,21 +65,25 @@ export default class Avaliacao extends Component {
                 <StatusBar  animated
                             barStyle='light-content'
                             translucent />
-                <View style={styles.infoContainer}>
-                    <Text style={styles.labelNormal}>Deixe sua nota para o estacionamento</Text>
-                    <Text style={styles.labelNormal}>{global.reserva.nomeEstacionamento}</Text>
-                    <View style={styles.filtro}>
-                        <Text style={styles.labelCentralizadoClaro}>Avaliação</Text> 
-                        <View style={styles.estrela}>{barraAvaliacao}</View>
-                            <Text style={styles.labelCentralizadoClaro}>
-                             {this.state.valorInicial} / {this.state.valorMaximo}
-                            </Text>
-                        </View>  
+                <View style={styles.infoContainer2}>
+                    <Text style={styles.labelCentralizado}>Deixe suas estrelas</Text>
+                    <Text style={styles.labelTitulo3}>{global.reserva.nomeEstacionamento}</Text>
 
-                     <TouchableOpacity style={styles.buttonBoxConfirmar}
+                    <View style={styles.filtroAvaliacao}>
+                        <Text style={styles.labelCentralizadoClaro}>Avaliação</Text> 
+                        <View style={styles.estrela}>
+                            {barraAvaliacao}
+                        </View>
+                        <Text style={styles.labelCentralizadoClaro}>
+                            {this.state.valorInicial} / {this.state.valorMaximo}
+                        </Text>
+                    </View>  
+                </View>
+                <View style={{...styles.footerContainer}}>
+                     <TouchableOpacity style={{...styles.buttonBoxConfirmar, marginTop: -20}} 
                                        onPress={() =>{this.avaliacao()}}>
                         <Text style={styles.buttonTextLogar}>Avaliar</Text>
-                    </TouchableOpacity>      
+                    </TouchableOpacity>  
                 </View>
             </View>   
         );

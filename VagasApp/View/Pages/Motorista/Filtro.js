@@ -126,7 +126,7 @@ export default class Filtro extends Component {
               <Text style={styles.labelCentralizadoClaro}>{this.state.distancia.toFixed(0)} Km</Text>
             </View>
 
-            <View style={styles.filtro}>
+            <View style={styles.filtroAvaliacao}>
               <Text style={styles.labelCentralizadoClaro}>Avaliação</Text> 
               <View style={styles.estrela}>{barraAvaliacao}</View>
                 <Text style={styles.labelCentralizadoClaro}>
