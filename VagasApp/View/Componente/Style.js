@@ -83,15 +83,15 @@ const styles = StyleSheet.create({
     
     //Logos
     logoContainer: {
-        alignItems: 'baseline',
+        alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 40
+        marginTop: 60
     },
 
     logo: {
-        width: 100,
+        width: 200,
         height: 150,
-        padding: 20
+        alignItems: 'center'
     },
 
     //ViewRow

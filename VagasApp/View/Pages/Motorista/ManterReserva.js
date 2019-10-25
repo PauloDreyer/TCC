@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {KeyboardAvoidingView, Text, View, TouchableOpacity} from 'react-native';
+import {KeyboardAvoidingView, Text, View, TouchableOpacity, StatusBar} from 'react-native';
 import {ScrollView } from 'react-native-gesture-handler';
 import styles from '../../Componente/Style';
 import DatePicker from 'react-native-datepicker';
@@ -7,6 +7,7 @@ import firebase from '../../../Model/Firebase';
 import {atualizarReseva, irValidarEntrada, irAvaliacao} from '../../../ViewModel/GerenciaReserva';
 import getDirections from 'react-native-google-maps-directions';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
+import { NavigationEvents } from 'react-navigation';
 
 export default class ManterReserva extends Component{
     constructor(props){
@@ -32,6 +33,8 @@ export default class ManterReserva extends Component{
             statusEntSai: '',
 			      avaliado: '',
             texto: '',
+            opacityAvaliado: 1,
+            desabilitaAvaliacao: false,
 
             estacionamento: [],
             dataEntradaAux: '',
@@ -87,6 +90,10 @@ export default class ManterReserva extends Component{
           this_.setState({texto: 'Avaliar Estacionamento'})
         }else{
           this_.setState({texto: 'Validar Entrada'})
+        }
+
+        if(global.reserva.avaliado == 'S'){
+          this_.setState({desabilitaAvaliacao: true, texto:''});
         }
 
         let ref = firebase.database().ref("estacionamento");
@@ -148,6 +155,9 @@ export default class ManterReserva extends Component{
     render() {
         return (
           <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
+            <StatusBar  animated
+                        barStyle='light-content'
+                        translucent />
             <View style={styles.infoContainer}>
             <ScrollView>
               <Text style={styles.labelTitulo}>{this_.state.nomeEstacionamento}</Text>
@@ -283,7 +293,8 @@ export default class ManterReserva extends Component{
               </TouchableOpacity>
               <Text style={styles.buttonTextRota}>Rotas</Text>
               
-              <TouchableOpacity 
+              <TouchableOpacity  style={opacity= 0}
+                    disabled={this_.state.desabilitaAvaliacao}
                     onPress={() =>{this_.irPara()}}>
                     <View style={styles.viewRow}>
                       <Text style={styles.labelTitulo5}>{this_.state.texto}</Text>
@@ -304,6 +315,7 @@ export default class ManterReserva extends Component{
                   </View>    
                 </ScrollView>
             </View>
+            <NavigationEvents onDidFocus={payload => {this_.componentDidMount()}}/>
           </KeyboardAvoidingView>
         );
     }

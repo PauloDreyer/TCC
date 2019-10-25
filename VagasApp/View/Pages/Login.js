@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { View, KeyboardAvoidingView, Text, StatusBar } from 'react-native';
+import { View, KeyboardAvoidingView, Text, StatusBar, Image } from 'react-native';
 import styles from '../Componente/Style';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import {logIn} from '../../ViewModel/Acesso'
@@ -59,6 +59,7 @@ export default class Login extends Component {
 
                 <View style={styles.logoContainer}>
                     <View style={styles.logo}>
+                        <Image source={require('../img/logo.png')}/>
                     </View>
                 </View>
 

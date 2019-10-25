@@ -64,6 +64,7 @@ export const avaliarReserva=async(dados, dadosEstacionamento, valorAvaliacao)=>{
     console.log(dados);
     calcularMediaAvaliacao(dados.keyEstacionamento, dadosEstacionamento, valorAvaliacao);
     dados.avaliado = 'S';
+    global.reserva.avaliado = 'S';
     await atualizarReserva(dados, 'X');
 }
 

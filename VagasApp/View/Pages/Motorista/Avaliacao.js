@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { View, Text, StatusBar, Image } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from '../../Componente/Style';
 import {avaliarReserva} from '../../../ViewModel/GerenciaReserva';
