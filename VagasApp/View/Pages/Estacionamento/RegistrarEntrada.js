@@ -27,7 +27,7 @@ export default class RegistrarEntrada extends Component {
     scanner = '';
 
     validarEntrada = async(e) => {
-        let retorno = await liberarEntrada(/*e.data*/'-Lr-jn4Q-leQYSJWPPP8');
+        let retorno = await liberarEntrada(e.data);
         this_.setState({
             nomeMotorista: 'Nome: ' + retorno.result.nomeMotorista,
             placa: 'Placa: ' + retorno.result.placa,
@@ -87,10 +87,6 @@ export default class RegistrarEntrada extends Component {
                     }
                     ref={(elem) => { this_.scanner = elem }}
                 />
-                    <TouchableOpacity style={styles.buttonBoxConfirmar}
-                                        onPress={this_.validarEntrada}>
-                        <Text style={styles.buttonTextLogar}>Salvar</Text>
-                    </TouchableOpacity> 
             </View>
         );
     }
