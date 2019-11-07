@@ -6,8 +6,9 @@ const  usuario = firebase.database().ref('usuario');
 
 export const insereUsuario = async(nome, cpf, cnpj, email, foneComercial, fone, placa, cep, endereco, numero, cidade, estado, senha, tipoUsuario, latitude, longitude)=>{  
 
+    var usuarioCriado = await createUser(nome, cpf, cnpj, email, foneComercial, fone, placa, cep, endereco, numero, cidade, estado, senha, tipoUsuario, latitude, longitude);
 
-    if(createUser(nome, cpf, cnpj, email, foneComercial, fone, placa, cep, endereco, numero, cidade, estado, senha, tipoUsuario, latitude, longitude)){
+    if(usuarioCriado){
         let chave = usuario.push().key;
         
         if(tipoUsuario == 'M'){

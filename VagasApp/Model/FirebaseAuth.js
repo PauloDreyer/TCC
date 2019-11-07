@@ -42,7 +42,32 @@ export const signOut=(dados)=>{
 
 export const createUser =async(nome, cpf, cnpj, email, foneComercial, fone, placa, cep, endereco, numero, cidade, estado, senha, tipoUsuario, latitude, longitude)=>{
     var retorno = false;
-    retorno  = await firebase.auth().createUserWithEmailAndPassword(email, senha)
+
+    return new Promise((resolve, reject)=>{
+        firebase.auth().createUserWithEmailAndPassword(email, senha)
+        .then(function(){
+            retorno = true;
+            resolve(retorno); 
+        })
+        .catch((error)=>{
+            if(error.code == 'auth/weak-password'){
+                ToastAndroid.showWithGravity('Senha Fraca! Informe Números e Caracteres!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+            }        
+            else if(error.code == 'auth/invalid-email'){
+                ToastAndroid.showWithGravity('Informe um e-mail válido!', ToastAndroid.SHORT);
+            }
+            else if(error.code == 'auth/email-already-exists'){
+                ToastAndroid.showWithGravity('Ops! Já existe um usuário com este e-mail!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+            }
+            else if(error.code == 'auth/email-already-in-use'){
+                ToastAndroid.showWithGravity('Ops! Já existe um usuário com este e-mail!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+            }
+            retorno = false;
+            reject(retorno); 
+        })
+    })
+
+    /*retorno  = await firebase.auth().createUserWithEmailAndPassword(email, senha)
     .then(function(){
          return true;
     })
@@ -61,7 +86,7 @@ export const createUser =async(nome, cpf, cnpj, email, foneComercial, fone, plac
         }
         return false;
     })
-    return retorno;
+    return retorno;*/
 }
 
 const alteraSenha =(senha)=>{

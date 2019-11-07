@@ -35,6 +35,7 @@ export default class Mapa extends Component{
 } 
 
   componentDidMount = async() =>{
+    global.estacionamento.id = '';
     let retorno = await component.getLocalizacao();
 
     if(retorno){

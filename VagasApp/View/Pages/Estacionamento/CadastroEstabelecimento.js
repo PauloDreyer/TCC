@@ -50,12 +50,8 @@ export class Estabelecimento extends Component {
         .done();
     }           
 
-    criarLoginUsuario(){
-        let retorno = criarCadastroEstabelecimento(this.state.nome, this.state.cnpj, this.state.email, this.state.foneComercial, this.state.fone, this.state.cep, this.state.endereco, this.state.numero,this.state.cidade, this.state.estado, this.state.senha, this.state.contraSenha, this.state.latitude, this.state.longitude);
-        
-        if(retorno){
-            this.props.navigation.navigate('Login');
-        }
+    criarLoginUsuario =async()=>{
+        let retorno = await criarCadastroEstabelecimento(this.state.nome, this.state.cnpj, this.state.email, this.state.foneComercial, this.state.fone, this.state.cep, this.state.endereco, this.state.numero,this.state.cidade, this.state.estado, this.state.senha, this.state.contraSenha, this.state.latitude, this.state.longitude, this);
     }
 
     getEndereco(cep){

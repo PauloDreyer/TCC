@@ -70,6 +70,7 @@ export const atualizarReserva =async(dados, status)=>{
     let statusReserva = '';
     let tipo = 'U';
     chave = dados.key;
+    let status2 = status;
     let retorno = await existeReserva(dados);
 
     if(status == 'C'){
@@ -110,12 +111,13 @@ export const atualizarReserva =async(dados, status)=>{
                 dados.keyEstacionamentoVagas = global.estacionamento.id;
                 dados.estacionamento = global.estacionamento;
             }
-            if(status != 'X'){
+            if(status != 'X' && status != 'A'){
+                
                 atualizarVagas(dados.keyEstacionamentoVagas, dados.estacionamento, dados.vagaEspecial, statusReserva, tipo);
             }
             
     
-            if(status ==''){
+            if(status =='A'){
                 ToastAndroid.showWithGravity('Reserva Alterada!', ToastAndroid.SHORT, ToastAndroid.CENTER);
             }
             else if(status =='C'){

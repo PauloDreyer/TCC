@@ -35,6 +35,7 @@ export default class ManterReserva extends Component{
             texto: '',
             opacityAvaliado: 1,
             desabilitaAvaliacao: false,
+            opacity: global.permiteCancelar,
 
             estacionamento: [],
             dataEntradaAux: '',
@@ -87,9 +88,9 @@ export default class ManterReserva extends Component{
         }
 
         if(global.reserva.statusEntSai == 'S'){
-          this_.setState({texto: 'Avaliar Estacionamento'})
+          this_.setState({texto: 'Avaliar Estacionamento', desabilita: true, opacity: this_.state.opacity})
         }else{
-          this_.setState({texto: 'Validar Entrada'})
+          this_.setState({texto: 'Validar Entrada/Saída', desabilita: true, opacity: this_.state.opacity})
         }
 
         if(global.reserva.avaliado == 'S'){
@@ -103,11 +104,12 @@ export default class ManterReserva extends Component{
     }
 
     cancelarReserva=()=>{
+      this_.setState({desabilita: true, opacity: 0}); 
       let retorno =atualizarReseva(this_.state, 'C');
     }
 
     alterarReserva=()=>{
-      let retorno =atualizarReseva(this_.state, '')
+      let retorno =atualizarReseva(this_.state, 'A')
     }
 
     irPara=()=>{
@@ -287,7 +289,7 @@ export default class ManterReserva extends Component{
               </View>
               <Text style={styles.labelTitulo3}>Total R$ {this_.state.valor}</Text>
 
-              <TouchableOpacity style={styles.buttonBoxRota}
+              <TouchableOpacity style={{...styles.buttonBoxRota}}
                     onPress={() =>{this_.handleGetDirections()}}>
                     <IconMaterial name="directions" color={'#F1F2F3'} style={styles.ImageIcon} size={40}/>
               </TouchableOpacity>
@@ -296,12 +298,12 @@ export default class ManterReserva extends Component{
               <TouchableOpacity  style={opacity= 0}
                     disabled={this_.state.desabilitaAvaliacao}
                     onPress={() =>{this_.irPara()}}>
-                    <View style={styles.viewRow}>
+                    <View style={{...styles.viewRow, opacity: this_.state.opacity}}>
                       <Text style={styles.labelTitulo5}>{this_.state.texto}</Text>
                     </View>
               </TouchableOpacity>
 
-                  <View style={{...styles.viewRow, opacity:  global.permiteCancelar}}>
+                  <View style={{...styles.viewRow, opacity: this_.state.opacity}}>
                     <TouchableOpacity style={styles.buttonBoxCancelar}
                                 disabled={this_.state.desabilita}
                                 onPress={() =>{this_.setState({status: "C"}), this_.cancelarReserva()}}>

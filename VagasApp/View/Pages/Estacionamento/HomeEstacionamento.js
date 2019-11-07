@@ -143,7 +143,7 @@ render() {
             <View style={styles.footerContainer}>
                 <TouchableOpacity style={styles.buttonBoxValidar}
                                 onPress={() =>{comp.props.navigation.navigate('RegistrarEntrada')}}>
-                    <Text style={styles.labelCentralizadoClaro}>Registrar Entrada </Text>
+                    <Text style={styles.labelCentralizadoClaro}>Registrar Entrada/Saída </Text>
                 </TouchableOpacity>
             </View> 
             <NavigationEvents onDidFocus={payload => {comp.setState({reservas: []}), comp.atualizar()}}/>   

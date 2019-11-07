@@ -18,7 +18,7 @@ export default class RegistrarEntrada extends Component {
             valor: null,
             pago : '',
             color: '#26A557',
-            status: 'Libera a entrada Aqui!',
+            status: 'Libera a Entrada/Saída Aqui!',
             unique: '',
         };
 

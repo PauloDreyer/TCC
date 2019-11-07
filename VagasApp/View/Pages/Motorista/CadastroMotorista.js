@@ -19,10 +19,8 @@ export default class CadastroScreen extends Component {
 
         this.criarLoginUsuario = this.criarLoginUsuario.bind(this);
     }  
-    criarLoginUsuario(){
-        if(criarCadastroMotorista(this.state.nome, this.state.cpf, this.state.email, this.state.fone, this.state.placa, this.state.senha, this.state.contraSenha)){
-            this.props.navigation.navigate('Login');
-        }
+    criarLoginUsuario =async()=>{
+        let retorno = await criarCadastroMotorista(this.state.nome, this.state.cpf, this.state.email, this.state.fone, this.state.placa, this.state.senha, this.state.contraSenha,this);
     }
 
    render() {

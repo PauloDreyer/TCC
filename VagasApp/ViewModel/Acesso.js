@@ -45,27 +45,44 @@ const criarUsuario = (nome, cpf, cnpj, email, foneComercial, fone, placa, cep, e
     }
     
     if(valido){
-        let retorno =insereUsuario(nome, cpf, cnpj, email, foneComercial, fone, placa, cep, endereco, numero, cidade, estado, senha, tipoUsuario, latitude, longitude);
-        if(retorno){
-            ToastAndroid.showWithGravity('Cadastro efetuado!', ToastAndroid.SHORT, ToastAndroid.CENTER);
-        }
+
+        return new Promise((resolve, reject) => {
+            insereUsuario(nome, cpf, cnpj, email, foneComercial, fone, placa, cep, endereco, numero, cidade, estado, senha, tipoUsuario, latitude, longitude).then(function() {
+                ToastAndroid.showWithGravity('Cadastro efetuado!', ToastAndroid.SHORT, ToastAndroid.CENTER);
+                valido = true;
+                resolve(valido)
+            }).catch(function(error) {
+                valido = false;
+                reject(valido);
+            });    
+        });
     }
 
     return valido;
 }
 
-export const criarCadastroMotorista = (nome, cpf, email, fone, placa, senha, contraSenha)=>{
+export const criarCadastroMotorista = (nome, cpf, email, fone, placa, senha, contraSenha, this_)=>{
     let tipoUsuario = 'M';
-    let retorno = criarUsuario(nome, cpf, '', email, '', fone, placa, '', '', '', '', '', senha, contraSenha, tipoUsuario, '', '');
-
-    return retorno;
+    return new Promise((resolve, reject) => {
+        criarUsuario(nome, cpf, '', email, '', fone, placa, '', '', '', '', '', senha, contraSenha, tipoUsuario, '', '').then(function() {
+            this_.props.navigation.navigate('Login');
+            resolve(true)
+        }).catch(function(error) {
+            reject(false);
+        });    
+    });
 }
 
-export const criarCadastroEstabelecimento = (nome, cnpj, email, foneComercial, fone, cep, endereco, numero, cidade, estado, senha, contraSenha, latitude, longitude)=>{
+export const criarCadastroEstabelecimento = (nome, cnpj, email, foneComercial, fone, cep, endereco, numero, cidade, estado, senha, contraSenha, latitude, longitude, this_)=>{
     let tipoUsuario = 'E';
-    let retorno = criarUsuario(nome, '', cnpj, email, foneComercial, fone, '', cep, endereco, numero, cidade, estado, senha, contraSenha, tipoUsuario, latitude, longitude);
-
-    return retorno;
+    return new Promise((resolve, reject) => {
+        criarUsuario(nome, '', cnpj, email, foneComercial, fone, '', cep, endereco, numero, cidade, estado, senha, contraSenha, tipoUsuario, latitude, longitude).then(function() {
+            this_.props.navigation.navigate('Login');
+            resolve(true)
+        }).catch(function(error) {
+            reject(false);
+        });    
+    });
 }
 //
 
