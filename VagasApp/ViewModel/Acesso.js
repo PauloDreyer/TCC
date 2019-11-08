@@ -128,18 +128,14 @@ export const alterarCadastroEstacionamento = (dados)=>{
     return retorno;
 }
 
-export const alterarSenha = async(email, senha, contraSenha)=>{
-    let valido = 'true';
-    
-    if(valido == 'true'){
-        return new Promise((resolve, reject) => {
-            let retorno = enviarEmailRedefinicaoSenha(email).then(function() {
-                resolve('true')
-            }).catch(function(error) {
-                reject('false');
-            });    
-        });
-
-    }
-    return valido;
+export const alterarSenha = async(dados)=>{
+  
+    return new Promise((resolve, reject) => {
+        enviarEmailRedefinicaoSenha(dados.state.email).then(function() {
+            dados.props.navigation.navigate('Login')
+            resolve('true')
+        }).catch(function(error) {
+            reject('false');
+        });    
+    });
 }

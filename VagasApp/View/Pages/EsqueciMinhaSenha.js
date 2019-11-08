@@ -11,14 +11,13 @@ export default class EsqueciMinhaSenha extends Component {
         super(props);
         this.state ={
             email:'',
-            senha:'',
         };
 
         forgot = this;
     }
 
     redefinirSenha = async() =>{
-        await alterarSenha(forgot.state.email, forgot.state.senha, forgot.state.contraSenha);
+        await alterarSenha(forgot);
     }
 
     render() {
