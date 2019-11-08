@@ -24,7 +24,6 @@ export const insereEstacionamento = (key, nome, cidade, estado, latitude, longit
 
 export const atualizarDadosEstacionamento =(id, dados)=>{
     global.atulizarEstacionamento = true;
-
     firebase.database().ref("estacionamento").child(id).set({
         key: dados.key,
         nome: dados.nome,

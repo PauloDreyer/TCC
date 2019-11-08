@@ -12,7 +12,8 @@ export default class Avaliacao extends Component {
         this.state ={
             valorInicial: 0,
             valorMaximo: 5,
-            estacionamento:[]
+            estacionamento:[],
+            keyEstacionamentoVagas:''
         };
 
     }
@@ -22,13 +23,14 @@ export default class Avaliacao extends Component {
     }
 
     avaliacao = async() =>{
-        await avaliarReserva(global.reserva, this.state.estacionamento, this.state.valorInicial);
+        await avaliarReserva(global.reserva, this.state.estacionamento, this.state.valorInicial, this.state.keyEstacionamentoVagas);
         this.props.navigation.goBack();
     }
 
     carregar=()=>{
         let estacionamento = this.props.navigation.getParam('estacionamento');
-        this.setState({estacionamento: estacionamento});
+        let keyEstacionamentoVagas = this.props.navigation.getParam('keyEstacionamentoVagas');
+        this.setState({estacionamento: estacionamento, keyEstacionamentoVagas: keyEstacionamentoVagas});
     }
 
     UpdateRating = (key) => {

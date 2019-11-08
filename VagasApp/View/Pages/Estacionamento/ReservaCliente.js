@@ -25,6 +25,8 @@ export default class ReservaCliente extends Component{
             keyEstacionamentoVagas: '',
             vagaEspecial: 0,
             descricaoVagaEspecial: '',
+            opacity: global.permiteCancelar,
+            desabilita: false,
 
             estacionamento: [],
         }  
@@ -51,10 +53,19 @@ export default class ReservaCliente extends Component{
                 placa: global.reserva.placa,
                 valor: Number(global.reserva.valor).toFixed(2),
                 vagaEspecial: global.reserva.vagaEspecial,
+                avaliado: global.reserva.avaliado,
+                statusEntSai: global.reserva.statusEntSai,
             });
             if(global.reserva.vagaEspecial == 1){
                 this_.setState({
                     descricaoVagaEspecial: 'Vaga Especial',
+                });
+            }
+
+            if(global.reserva.statusEntSai != ''){
+                this_.setState({
+                    opacity: 0,
+                    desabilita: true
                 });
             }
         }
@@ -72,8 +83,12 @@ export default class ReservaCliente extends Component{
         }
     }
 
-    cancelarReserva=()=>{
-      let retorno =atualizarReseva(this_.state, 'C');
+    cancelarReserva=async()=>{
+      let retorno = await atualizarReseva(this_.state, 'C');
+      this_.setState({
+        opacity: 0,
+        desabilita: true
+      });
     }
 
     render() {
@@ -108,8 +123,9 @@ export default class ReservaCliente extends Component{
             </View>
             <Text style={styles.labelCentralizado}>Total</Text>
             <Text style={styles.labelTitulo3}>R$ {this_.state.valor}</Text>
-            <View style={{...styles.viewRow, opacity: global.permiteCancelar}}>
+            <View style={{...styles.viewRow, opacity: this_.state.opacity}}>
                 <TouchableOpacity style={styles.buttonBoxCancelar}
+                            disabled={this_.state.desabilita}
                             onPress={() =>{this_.setState({status: "C"}),this_.cancelarReserva()}}>
                     <Text style={styles.buttonTextLogar}>Cancelar</Text>
                 </TouchableOpacity>

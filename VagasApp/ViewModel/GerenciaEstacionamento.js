@@ -23,7 +23,6 @@ export const calcularMediaAvaliacao=(id, dados, valorAvaliacao)=>{
 
     dados.totalAvaliacao = totalAvaliacao;
     dados.qtdeAvaliacao = totalQtdeAvaliacao;
-    console.log(totalAvaliacao + ' - '+ totalQtdeAvaliacao);
     atualizarDadosEstacionamento(id, dados);
     ToastAndroid.showWithGravity('Obrigado por sua Avaliação!', ToastAndroid.SHORT, ToastAndroid.CENTER); 
 

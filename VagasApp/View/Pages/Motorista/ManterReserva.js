@@ -57,10 +57,11 @@ export default class ManterReserva extends Component{
         this_.maxData = datamax;
 
         if(global.permiteCancelar == 0){
-          this_.setState({desabilita: true});
+          alert(global.permiteCancelar)
+          this_.setState({desabilita: true, opacity: 0});
         }
         else{
-          this_.setState({desabilita: false});
+          this_.setState({desabilita: false, opacity: 1});
         }
         
         if(global.reserva.key !=''){
@@ -88,13 +89,20 @@ export default class ManterReserva extends Component{
         }
 
         if(global.reserva.statusEntSai == 'S'){
-          this_.setState({texto: 'Avaliar Estacionamento', desabilita: true, opacity: this_.state.opacity})
+          this_.setState({texto: 'Avaliar Estacionamento', desabilita: true, opacity: 0, opacityAvaliado: 1})
         }else{
-          this_.setState({texto: 'Validar Entrada/Saída', desabilita: true, opacity: this_.state.opacity})
+          if(global.reserva.statusEntSai == 'E'){
+            this_.setState({desabilita: true, opacity: 0});
+          }
+          this_.setState({texto: 'Validar Entrada/Saída', opacityAvaliado: 1})
+        }
+
+        if(global.reserva.status == 'C'){
+          this_.setState({opacity: 0})
         }
 
         if(global.reserva.avaliado == 'S'){
-          this_.setState({desabilitaAvaliacao: true, texto:''});
+          this_.setState({desabilitaAvaliacao: true, texto:'', opacityAvaliado: 0});
         }
 
         let ref = firebase.database().ref("estacionamento");
@@ -295,10 +303,10 @@ export default class ManterReserva extends Component{
               </TouchableOpacity>
               <Text style={styles.buttonTextRota}>Rotas</Text>
               
-              <TouchableOpacity  style={opacity= 0}
+              <TouchableOpacity  style={opacity= this_.state.opacityAvaliado}
                     disabled={this_.state.desabilitaAvaliacao}
                     onPress={() =>{this_.irPara()}}>
-                    <View style={{...styles.viewRow, opacity: this_.state.opacity}}>
+                    <View style={{...styles.viewRow, opacity: this_.state.opacityAvaliado}}>
                       <Text style={styles.labelTitulo5}>{this_.state.texto}</Text>
                     </View>
               </TouchableOpacity>

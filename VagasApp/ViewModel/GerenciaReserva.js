@@ -57,12 +57,11 @@ export const irValidarEntrada=(dados)=>{
 }
 
 export const irAvaliacao=(dados)=>{
-    dados.props.navigation.navigate('Avaliacao', {estacionamento: dados.state.estacionamento});
+    dados.props.navigation.navigate('Avaliacao', {estacionamento: dados.state.estacionamento, keyEstacionamentoVagas: dados.state.keyEstacionamentoVagas});
 }
 
-export const avaliarReserva=async(dados, dadosEstacionamento, valorAvaliacao)=>{
-
-    calcularMediaAvaliacao(dados.keyEstacionamento, dadosEstacionamento, valorAvaliacao);
+export const avaliarReserva=async(dados, dadosEstacionamento, valorAvaliacao, keyEstacionamentoVagas)=>{
+    calcularMediaAvaliacao(keyEstacionamentoVagas, dadosEstacionamento, valorAvaliacao);
     dados.avaliado = 'S';
     global.reserva.avaliado = 'S';
     await atualizarReserva(dados, 'X');
